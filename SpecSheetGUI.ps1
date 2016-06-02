@@ -1,8 +1,15 @@
-﻿[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing") 
+[void] [System.Reflection.Assembly]::LoadWithPartialName("System.Drawing") 
 [void] [System.Reflection.Assembly]::LoadWithPartialName("System.Windows.Forms") 
 
+$TitleFont = New-Object System.Drawing.Font("Arial",14,[System.Drawing.FontStyle]::Regular)
+
+$TextBoxFont = New-Object System.Drawing.Font("Arial",8.5,[System.Drawing.FontStyle]::Regular)
+
+$GroupBoxFont = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontStyle]::Bold)
+# Font styles are: Regular, Bold, Italic, Underline, Strikeout
+
 [int32] $rowOne = 10
-[int32] $rowTwo = 55
+[int32] $rowTwo = 60
 [int32] $rowThree = 130
 [int32] $rowFour = 185
 [int32] $rowFive = 240
@@ -15,14 +22,14 @@
 
 
 [int32] $columnOne = 10
-[int32] $columnTwo = 175
-[int32] $columnThree = 400
-
+[int32] $columnTwo = 120
+[int32] $columnThree = 215
+[int32] $columnFour = 345
 
 
 
 $objForm = New-Object System.Windows.Forms.Form 
-$objForm.Text = "Spec Sheet"
+$objForm.Text = "Computer Spec Sheet"
 $objForm.Size = New-Object System.Drawing.Size(1000,600) 
 $objForm.StartPosition = "CenterScreen"
 
@@ -59,51 +66,109 @@ $CancelButton.Add_Click({
 })
 $objForm.Controls.Add($CancelButton)
 
+
+#Title
+$objLabelTitle = New-Object System.Windows.Forms.Label
+$objLabelTitle.Location = New-Object System.Drawing.Size(350,15) 
+$objLabelTitle.Size = New-Object System.Drawing.Size(300,25) 
+$objLabelTitle.Text = "Computer Spec Sheet"
+$objLabelTitle.Font = $TitleFont
+$FontSize = $objLabelTitle.Font.Size
+$FontSize
+$objForm.Controls.Add($objLabelTitle) 
+
+
 # Tester
 $objTextBoxTester = New-Object System.Windows.Forms.TextBox 
 $objTextBoxTester.Location = New-Object System.Drawing.Size(150,($rowOne + 15)) 
 $objTextBoxTester.Size = New-Object System.Drawing.Size(80,20) 
-$objTextBoxTester.Font = "Arial"
+$objTextBoxTester.Font = $TextBoxFont
 $objTextBoxTester.Text = "jnitz"
+#$objTextBoxTester.BorderStyle = "Fixed3D"
 $objForm.Controls.Add($objTextBoxTester) 
 
 $objGroupBoxTester = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxTester.Location = New-Object System.Drawing.Size(140,10)
-$objGroupBoxTester.Size = New-Object System.Drawing.Size(100,40)
-$objGroupBoxTester.Font = "Arial Bold"
+$objGroupBoxTester.Location = New-Object System.Drawing.Size(140,$rowOne)
+$objGroupBoxTester.Size = New-Object System.Drawing.Size(100,45)
+$objGroupBoxTester.Font = $GroupBoxFont
 $objGroupBoxTester.Text = "Tester"
 $objForm.Controls.Add($objGroupBoxTester)
 
 
 # ISPF/PO
-#$objLabelISPF_PO.Size = New-Object System.Drawing.Size(50,15) 
+#$objLabelCondition.Size = New-Object System.Drawing.Size(50,15) 
 
-$objTextBoxISPF_PO = New-Object System.Windows.Forms.TextBox 
-$objTextBoxISPF_PO.Location = New-Object System.Drawing.Size($columnOne,($rowTwo + 15)) 
-$objTextBoxISPF_PO.Size = New-Object System.Drawing.Size(80,20) 
-$objTextBoxISPF_PO.Font = "Arial"
-$objForm.Controls.Add($objTextBoxISPF_PO) 
+$objTextBoxCondition = New-Object System.Windows.Forms.TextBox 
+$objTextBoxCondition.Location = New-Object System.Drawing.Size(($columnOne + 10),($rowTwo + 15)) 
+$objTextBoxCondition.Size = New-Object System.Drawing.Size(80,20) 
+$objTextBoxCondition.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxCondition) 
 
-$objGroupBoxISPF_PO = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxISPF_PO.Location = New-Object System.Drawing.Size($columnOne,$rowTwo)
-$objGroupBoxISPF_PO.Size = New-Object System.Drawing.Size(100,40)
-$objGroupBoxISPF_PO.Font = "Arial Bold"
-$objGroupBoxISPF_PO.Text = "ISPF / PO"
-$objForm.Controls.Add($objGroupBoxISPF_PO)
+$objGroupBoxCondition = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCondition.Location = New-Object System.Drawing.Size($columnOne,$rowTwo)
+$objGroupBoxCondition.Size = New-Object System.Drawing.Size(100,45)
+$objGroupBoxCondition.Font = $GroupBoxFont
+$objGroupBoxCondition.Text = "ISPF / PO"
+$objForm.Controls.Add($objGroupBoxCondition)
+
+#Date
+$Date = "12/12/1234"
+
+$objLabelDate = New-Object System.Windows.Forms.Label
+$objLabelDate.Location = New-Object System.Drawing.Size(($columnTwo + 10),($rowTwo + 20)) 
+$objLabelDate.Size = New-Object System.Drawing.Size(70,15) 
+$objLabelDate.Font = $TextBoxFont
+$objLabelDate.Text = $Date
+$objForm.Controls.Add($objLabelDate) 
+
+$objGroupBoxDate = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxDate.Location = New-Object System.Drawing.Size($columnTwo,$rowTwo)
+$objGroupBoxDate.Size = New-Object System.Drawing.Size(85,45)
+$objGroupBoxDate.Font = $GroupBoxFont
+$objGroupBoxDate.Text = "Date"
+$objForm.Controls.Add($objGroupBoxDate)
+
+
+#Condition
+$objComboBoxCondition = New-Object System.Windows.Forms.ComboBox
+$objComboBoxCondition.Location = New-Object System.Drawing.Size(($columnThree + 10),($rowTwo + 15))
+$objComboBoxCondition.Size = New-Object System.Drawing.Size(100,20)
+$objComboBoxCondition.Font = $TextBoxFont
+
+[void] $objComboBoxCondition.Items.Add("Boots to Bios")
+[void] $objComboBoxCondition.Items.Add("Power Only")
+[void] $objComboBoxCondition.Items.Add("Something Else")
+
+$objForm.Controls.Add($objComboBoxCondition) 
+
+$objGroupBoxCondition = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCondition.Location = New-Object System.Drawing.Size($columnThree,$rowTwo)
+$objGroupBoxCondition.Size = New-Object System.Drawing.Size(120,45)
+$objGroupBoxCondition.Font = $GroupBoxFont
+$objGroupBoxCondition.Text = "Condition"
+$objForm.Controls.Add($objGroupBoxCondition)
+
 
 # Weight
-$objLabelWeight = New-Object System.Windows.Forms.Label
-$objLabelWeight.Location = New-Object System.Drawing.Size($columnTwo,$rowTwo) 
-$objLabelWeight.Size = New-Object System.Drawing.Size(50,15) 
-$objLabelWeight.Text = "Weight"
-$objLabelWeight.Font = "Arial"
+$objTextBoxWeight = New-Object System.Windows.Forms.TextBox 
+$objTextBoxWeight.Location = New-Object System.Drawing.Size(($columnFour + 10),($rowTwo + 15)) 
+$objTextBoxWeight.Size = New-Object System.Drawing.Size(40,20) 
+$objTextBoxWeight.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxWeight) 
+
+$objLabelWeigth = New-Object System.Windows.Forms.Label
+$objLabelWeight.Location = New-Object System.Drawing.Size(($columnFour + 55),($rowTwo + 20)) 
+$objLabelWeight.Size = New-Object System.Drawing.Size(15,15) 
+$objLabelWeight.Text = "lb"
+$objLabelWeight.Font = $TextBoxFont
 $objForm.Controls.Add($objLabelWeight) 
 
-$objTextBoxWeight = New-Object System.Windows.Forms.TextBox 
-$objTextBoxWeight.Location = New-Object System.Drawing.Size($columnTwo,($rowTwo + 15)) 
-$objTextBoxWeight.Size = New-Object System.Drawing.Size(40,20) 
-$objTextBoxWeight.Font = "Arial"
-$objForm.Controls.Add($objTextBoxWeight) 
+$objGroupBoxWeight = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxWeight.Location = New-Object System.Drawing.Size($columnFour,$rowTwo)
+$objGroupBoxWeight.Size = New-Object System.Drawing.Size(75,45)
+$objGroupBoxWeight.Font = $GroupBoxFont
+$objGroupBoxWeight.Text = "Weight"
+$objForm.Controls.Add($objGroupBoxWeight)
 
 
 # Brand
@@ -496,7 +561,7 @@ $objForm.Add_Shown({$objForm.Activate()})
 
 # Capture Input from form into variables
 $Tester = $objTextBoxTester.Text
-$ISPF_PO = $objTextBoxISPF_PO.Text
+$Condition = $objTextBoxCondition.Text
 $Weight = $objTextBoxWeight.Text
 $Brand = $objComboBoxBrand.Text
 $SerialNum = $objTextBoxSerialNum.Text
@@ -518,7 +583,7 @@ $RAMSpeed = $objComboBoxRAMSpeed.Text
 
 # Display variables
 $Tester
-$ISPF_PO
+$Condition
 $Weight
 $Brand
 $SerialNum
