@@ -98,27 +98,27 @@ $objForm.Controls.Add($objGroupBoxTester)
 # ISPF/PO
 #$objLabelCondition.Size = New-Object System.Drawing.Size(50,15) 
 
-$objTextBoxCondition = New-Object System.Windows.Forms.TextBox 
-$objTextBoxCondition.Location = New-Object System.Drawing.Size(($columnOne + 10),($rowTwo + 15)) 
-$objTextBoxCondition.Size = New-Object System.Drawing.Size(80,20) 
-$objTextBoxCondition.Font = $TextBoxFont
-$objForm.Controls.Add($objTextBoxCondition) 
+$objTextBoxISPF_PO = New-Object System.Windows.Forms.TextBox 
+$objTextBoxISPF_PO.Location = New-Object System.Drawing.Size(($columnOne + 10),($rowTwo + 15)) 
+$objTextBoxISPF_PO.Size = New-Object System.Drawing.Size(80,20) 
+$objTextBoxISPF_PO.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxISPF_PO) 
 
-$objGroupBoxCondition = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxCondition.Location = New-Object System.Drawing.Size($columnOne,$rowTwo)
-$objGroupBoxCondition.Size = New-Object System.Drawing.Size(100,45)
-$objGroupBoxCondition.Font = $GroupBoxFont
-$objGroupBoxCondition.Text = "ISPF / PO"
-$objForm.Controls.Add($objGroupBoxCondition)
+$objGroupBoxISPF_PO = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxISPF_PO.Location = New-Object System.Drawing.Size($columnOne,$rowTwo)
+$objGroupBoxISPF_PO.Size = New-Object System.Drawing.Size(100,45)
+$objGroupBoxISPF_PO.Font = $GroupBoxFont
+$objGroupBoxISPF_PO.Text = "ISPF / PO"
+$objForm.Controls.Add($objGroupBoxISPF_PO)
 
 #Date
-$Date = "12/12/1234"
+$CurrentDate = "12/12/1234"
 
 $objLabelDate = New-Object System.Windows.Forms.Label
 $objLabelDate.Location = New-Object System.Drawing.Size(($columnTwo + 10),($rowTwo + 20)) 
 $objLabelDate.Size = New-Object System.Drawing.Size(70,15) 
 $objLabelDate.Font = $TextBoxFont
-$objLabelDate.Text = $Date
+$objLabelDate.Text = $CurrentDate
 $objForm.Controls.Add($objLabelDate) 
 
 $objGroupBoxDate = New-Object System.Windows.Forms.GroupBox
@@ -156,7 +156,7 @@ $objTextBoxWeight.Size = New-Object System.Drawing.Size(40,20)
 $objTextBoxWeight.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxWeight) 
 
-$objLabelWeigth = New-Object System.Windows.Forms.Label
+$objLabelWeight = New-Object System.Windows.Forms.Label
 $objLabelWeight.Location = New-Object System.Drawing.Size(($columnFour + 55),($rowTwo + 20)) 
 $objLabelWeight.Size = New-Object System.Drawing.Size(15,15) 
 $objLabelWeight.Text = "lb"
@@ -561,7 +561,9 @@ $objForm.Add_Shown({$objForm.Activate()})
 
 # Capture Input from form into variables
 $Tester = $objTextBoxTester.Text
-$Condition = $objTextBoxCondition.Text
+$ISPF_PO = $objTextBoxISPF_PO.Text
+$Date = $objLabelDate.Text
+$Condition = $objComboBoxCondition.Text
 $Weight = $objTextBoxWeight.Text
 $Brand = $objComboBoxBrand.Text
 $SerialNum = $objTextBoxSerialNum.Text
@@ -583,6 +585,8 @@ $RAMSpeed = $objComboBoxRAMSpeed.Text
 
 # Display variables
 $Tester
+$ISPF_PO
+$Date
 $Condition
 $Weight
 $Brand
