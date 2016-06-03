@@ -10,15 +10,13 @@ $GroupBoxFont = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontSty
 
 [int32] $rowOne = 10
 [int32] $rowTwo = 60
-[int32] $rowThree = 130
-[int32] $rowFour = 185
-[int32] $rowFive = 240
-[int32] $rowSix = 295
-[int32] $rowSeven = 350
-[int32] $rowEight = 405
-[int32] $rowNine = 460
-[int32] $rowTen = 515
-[int32] $rowEleven = 570
+[int32] $rowThree = 110
+[int32] $rowFour = 160
+[int32] $rowFive = 210
+[int32] $rowSix = 260
+[int32] $rowSeven = 310
+[int32] $rowEight = 360
+[int32] $rowNine = 410
 
 
 [int32] $columnOne = 10
@@ -26,6 +24,8 @@ $GroupBoxFont = New-Object System.Drawing.Font("Arial",8,[System.Drawing.FontSty
 [int32] $columnThree = 215
 [int32] $columnFour = 345
 
+[int32] $x_offset = 10
+[int32] $y_offset = 15
 
 
 $objForm = New-Object System.Windows.Forms.Form 
@@ -80,7 +80,7 @@ $objForm.Controls.Add($objLabelTitle)
 
 # Tester
 $objTextBoxTester = New-Object System.Windows.Forms.TextBox 
-$objTextBoxTester.Location = New-Object System.Drawing.Size(150,($rowOne + 15)) 
+$objTextBoxTester.Location = New-Object System.Drawing.Size(150,($rowOne + $y_offset)) 
 $objTextBoxTester.Size = New-Object System.Drawing.Size(80,20) 
 $objTextBoxTester.Font = $TextBoxFont
 $objTextBoxTester.Text = "jnitz"
@@ -99,7 +99,7 @@ $objForm.Controls.Add($objGroupBoxTester)
 #$objLabelCondition.Size = New-Object System.Drawing.Size(50,15) 
 
 $objTextBoxISPF_PO = New-Object System.Windows.Forms.TextBox 
-$objTextBoxISPF_PO.Location = New-Object System.Drawing.Size(($columnOne + 10),($rowTwo + 15)) 
+$objTextBoxISPF_PO.Location = New-Object System.Drawing.Size(($columnOne + $x_offset),($rowTwo + $y_offset)) 
 $objTextBoxISPF_PO.Size = New-Object System.Drawing.Size(80,20) 
 $objTextBoxISPF_PO.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxISPF_PO) 
@@ -115,7 +115,7 @@ $objForm.Controls.Add($objGroupBoxISPF_PO)
 $CurrentDate = "12/12/1234"
 
 $objLabelDate = New-Object System.Windows.Forms.Label
-$objLabelDate.Location = New-Object System.Drawing.Size(($columnTwo + 10),($rowTwo + 20)) 
+$objLabelDate.Location = New-Object System.Drawing.Size(($columnTwo + $x_offset),($rowTwo + $y_offset)) 
 $objLabelDate.Size = New-Object System.Drawing.Size(70,15) 
 $objLabelDate.Font = $TextBoxFont
 $objLabelDate.Text = $CurrentDate
@@ -131,7 +131,7 @@ $objForm.Controls.Add($objGroupBoxDate)
 
 #Condition
 $objComboBoxCondition = New-Object System.Windows.Forms.ComboBox
-$objComboBoxCondition.Location = New-Object System.Drawing.Size(($columnThree + 10),($rowTwo + 15))
+$objComboBoxCondition.Location = New-Object System.Drawing.Size(($columnThree + $x_offset),($rowTwo + $y_offset))
 $objComboBoxCondition.Size = New-Object System.Drawing.Size(100,20)
 $objComboBoxCondition.Font = $TextBoxFont
 
@@ -151,13 +151,13 @@ $objForm.Controls.Add($objGroupBoxCondition)
 
 # Weight
 $objTextBoxWeight = New-Object System.Windows.Forms.TextBox 
-$objTextBoxWeight.Location = New-Object System.Drawing.Size(($columnFour + 10),($rowTwo + 15)) 
+$objTextBoxWeight.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowTwo + $y_offset)) 
 $objTextBoxWeight.Size = New-Object System.Drawing.Size(40,20) 
 $objTextBoxWeight.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxWeight) 
 
 $objLabelWeight = New-Object System.Windows.Forms.Label
-$objLabelWeight.Location = New-Object System.Drawing.Size(($columnFour + 55),($rowTwo + 20)) 
+$objLabelWeight.Location = New-Object System.Drawing.Size(($columnFour + $x_offset + 45),($rowTwo + $y_offset + 5)) 
 $objLabelWeight.Size = New-Object System.Drawing.Size(15,15) 
 $objLabelWeight.Text = "lb"
 $objLabelWeight.Font = $TextBoxFont
@@ -172,18 +172,16 @@ $objForm.Controls.Add($objGroupBoxWeight)
 
 
 # Brand
-$objLabelBrand = New-Object System.Windows.Forms.Label
-$objLabelBrand.Location = New-Object System.Drawing.Size($columnOne,$rowThree) 
-$objLabelBrand.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelBrand.Text = "Brand"
-$objLabelBrand.Font = "Arial"
-$objForm.Controls.Add($objLabelBrand) 
-
-
 $objComboBoxBrand = New-Object System.Windows.Forms.ComboBox
-$objComboBoxBrand.Location = New-Object System.Drawing.Size($columnOne,($rowThree + 15))
+$objComboBoxBrand.Location = New-Object System.Drawing.Size(($columnOne + $x_offset),($rowThree + $y_offset))
 $objComboBoxBrand.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxBrand.Font = "Arial"
+$objComboBoxBrand.Font = $TextBoxFont
+
+$objTextBoxOther = New-Object System.Windows.Forms.TextBox 
+$objTextBoxOther.Location = New-Object System.Drawing.Size(($columnOne + $x_offset + 110),($rowThree + $y_offset)) 
+$objTextBoxOther.Size = New-Object System.Drawing.Size(65,20) 
+$objTextBoxOther.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxOther) 
 
 <#
 $objComboBoxBrand.Add_Click({
@@ -201,56 +199,47 @@ $objComboBoxBrand.Add_Click({
 
 $objForm.Controls.Add($objComboBoxBrand) 
 
-<#
-$objTextBoxOther = New-Object System.Windows.Forms.TextBox 
-$objTextBoxOther.Location = New-Object System.Drawing.Size(125,95) 
-$objTextBoxOther.Size = New-Object System.Drawing.Size(40,20) 
-$objTextBoxOther.Font = "Arial"
-$objForm.Controls.Add($objTextBoxOther) 
-#>
+$objGroupBoxBrand = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxBrand.Location = New-Object System.Drawing.Size($columnOne,$rowThree)
+$objGroupBoxBrand.Size = New-Object System.Drawing.Size(195,45)
+$objGroupBoxBrand.Font = $GroupBoxFont
+$objGroupBoxBrand.Text = "Brand"
+$objForm.Controls.Add($objGroupBoxBrand)
+
 
 # Serial Number
-$objLabelSerialNum = New-Object System.Windows.Forms.Label
-$objLabelSerialNum.Location = New-Object System.Drawing.Size($columnTwo,$rowThree) 
-$objLabelSerialNum.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelSerialNum.Text = "Serial Number"
-$objLabelSerialNum.Font = "Arial"
-$objForm.Controls.Add($objLabelSerialNum) 
-
 $objTextBoxSerialNum = New-Object System.Windows.Forms.TextBox 
-$objTextBoxSerialNum.Location = New-Object System.Drawing.Size($columnTwo,($rowThree + 15)) 
+$objTextBoxSerialNum.Location = New-Object System.Drawing.Size(($columnThree + $x_offset),($rowThree + $y_offset)) 
 $objTextBoxSerialNum.Size = New-Object System.Drawing.Size(100,20) 
-$objTextBoxSerialNum.Font = "Arial"
+$objTextBoxSerialNum.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxSerialNum) 
 
+$objGroupBoxSerialNum = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxSerialNum.Location = New-Object System.Drawing.Size($columnThree,$rowThree)
+$objGroupBoxSerialNum.Size = New-Object System.Drawing.Size(120,45)
+$objGroupBoxSerialNum.Font = $GroupBoxFont
+$objGroupBoxSerialNum.Text = "Serial Number"
+$objForm.Controls.Add($objGroupBoxSerialNum)
 
 # Model
-$objLabelModel = New-Object System.Windows.Forms.Label
-$objLabelModel.Location = New-Object System.Drawing.Size($columnOne,$rowFour) 
-$objLabelModel.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelModel.Text = "Model"
-$objLabelModel.Font = "Arial"
-$objForm.Controls.Add($objLabelModel) 
-
 $objTextBoxModel = New-Object System.Windows.Forms.TextBox 
-$objTextBoxModel.Location = New-Object System.Drawing.Size($columnOne,($rowFour + 15)) 
-$objTextBoxModel.Size = New-Object System.Drawing.Size(100,20) 
-$objTextBoxModel.Font = "Arial"
+$objTextBoxModel.Location = New-Object System.Drawing.Size(($columnOne + $x_offset),($rowFour + $y_offset)) 
+$objTextBoxModel.Size = New-Object System.Drawing.Size(175,20) 
+$objTextBoxModel.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxModel) 
 
+$objGroupBoxModel = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxModel.Location = New-Object System.Drawing.Size($columnOne,$rowFour)
+$objGroupBoxModel.Size = New-Object System.Drawing.Size(195,45)
+$objGroupBoxModel.Font = $GroupBoxFont
+$objGroupBoxModel.Text = "Model"
+$objForm.Controls.Add($objGroupBoxModel)
 
 # Form Factor
-$objLabelFormFactor = New-Object System.Windows.Forms.Label
-$objLabelFormFactor.Location = New-Object System.Drawing.Size($columnTwo,$rowFour) 
-$objLabelFormFactor.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelFormFactor.Text = "Form Factor"
-$objLabelFormFactor.Font = "Arial"
-$objForm.Controls.Add($objLabelFormFactor) 
-
 $objComboBoxFormFactor = New-Object System.Windows.Forms.ComboBox
-$objComboBoxFormFactor.Location = New-Object System.Drawing.Size($columnTwo,($rowFour + 15))
+$objComboBoxFormFactor.Location = New-Object System.Drawing.Size(($columnThree + $x_offset),($rowFour + $y_offset))
 $objComboBoxFormFactor.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxFormFactor.Font = "Arial"
+$objComboBoxFormFactor.Font = $TextBoxFont
 
 [void] $objComboBoxFormFactor.Items.Add("Desktop")
 [void] $objComboBoxFormFactor.Items.Add("Laptop")
@@ -263,96 +252,99 @@ $objComboBoxFormFactor.Font = "Arial"
 
 $objForm.Controls.Add($objComboBoxFormFactor) 
 
-
-# Number of CPUs (Col1)(Row6)
-$objLabelNumCPUs = New-Object System.Windows.Forms.Label
-$objLabelNumCPUs.Location = New-Object System.Drawing.Size(($columnOne + 30),$rowSix) 
-$objLabelNumCPUs.Size = New-Object System.Drawing.Size(30,15) 
-$objLabelNumCPUs.Text = "CPUs"
-$objLabelNumCPUs.Font = "Arial"
-$objForm.Controls.Add($objLabelNumCPUs) 
-
-$objTextBoxNumCPUs = New-Object System.Windows.Forms.TextBox 
-$objTextBoxNumCPUs.Location = New-Object System.Drawing.Size(($columnOne + 30),($rowSix + 15)) 
-$objTextBoxNumCPUs.Size = New-Object System.Drawing.Size(30,20) 
-$objTextBoxNumCPUs.Font = "Arial"
-$objForm.Controls.Add($objTextBoxNumCPUs) 
+$objGroupBoxFormFactor = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxFormFactor.Location = New-Object System.Drawing.Size($columnThree,$rowFour)
+$objGroupBoxFormFactor.Size = New-Object System.Drawing.Size(120,45)
+$objGroupBoxFormFactor.Font = $GroupBoxFont
+$objGroupBoxFormFactor.Text = "Form Factor"
+$objForm.Controls.Add($objGroupBoxFormFactor)
 
 
-# Number of Cores (Col2)(Row6)
-$objLabelNumCores = New-Object System.Windows.Forms.Label
-$objLabelNumCores.Location = New-Object System.Drawing.Size(($columnTwo - 50),$rowSix) 
-$objLabelNumCores.Size = New-Object System.Drawing.Size(30,15) 
-$objLabelNumCores.Text = "Cores"
-$objLabelNumCores.Font = "Arial"
-$objForm.Controls.Add($objLabelNumCores) 
+# CPU Quantity
+$objTextBoxCPUQty = New-Object System.Windows.Forms.TextBox 
+$objTextBoxCPUQty.Location = New-Object System.Drawing.Size(($columnOne + (3 * $x_offset)),($rowFive + $y_offset)) 
+$objTextBoxCPUQty.Size = New-Object System.Drawing.Size(30,20) 
+$objTextBoxCPUQty.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxCPUQty) 
 
-$objTextBoxNumCores = New-Object System.Windows.Forms.TextBox 
-$objTextBoxNumCores.Location = New-Object System.Drawing.Size(($columnTwo - 50),($rowSix + 15)) 
-$objTextBoxNumCores.Size = New-Object System.Drawing.Size(30,20) 
-$objTextBoxNumCores.Font = "Arial"
-$objForm.Controls.Add($objTextBoxNumCores) 
+$objGroupBoxCPUQty = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCPUQty.Location = New-Object System.Drawing.Size(($columnOne + $x_offset),$rowFive)
+$objGroupBoxCPUQty.Size = New-Object System.Drawing.Size(80,45)
+$objGroupBoxCPUQty.Font = $GroupBoxFont
+$objGroupBoxCPUQty.Text = "CPU Qty"
+$objForm.Controls.Add($objGroupBoxCPUQty)
 
+# CPU Cores 
+$objTextBoxCPUCores = New-Object System.Windows.Forms.TextBox 
+$objTextBoxCPUCores.Location = New-Object System.Drawing.Size(($columnTwo + (2 * $x_offset)),($rowFive + $y_offset)) 
+$objTextBoxCPUCores.Size = New-Object System.Drawing.Size(30,20) 
+$objTextBoxCPUCores.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxCPUCores) 
 
-# HyperThreading Check Box (Col3)(Row6)
+# HyperThreading Check Box
 $objLabelHyperThreading = New-Object System.Windows.Forms.Label
-$objLabelHyperThreading.Location = New-Object System.Drawing.Size($columnTwo,$rowSix) 
-$objLabelHyperThreading.Size = New-Object System.Drawing.Size(100,15) 
+$objLabelHyperThreading.Location = New-Object System.Drawing.Size(($columnTwo + (9 * $x_offset)),($rowFive + $y_offset + 5)) 
+$objLabelHyperThreading.Size = New-Object System.Drawing.Size(20,15) 
 $objLabelHyperThreading.Text = "HT"
-$objLabelHyperThreading.Font = "Arial"
+$objLabelHyperThreading.Font = $TextBoxFont
 $objForm.Controls.Add($objLabelHyperThreading) 
 
 $objCheckBoxHyperThreading = New-Object System.Windows.Forms.CheckBox
-$objCheckBoxHyperThreading.Location = New-Object System.Drawing.Size($columnTwo,($rowSix + 15)) 
+$objCheckBoxHyperThreading.Location = New-Object System.Drawing.Size(($columnTwo + (7 * $x_offset)),($rowFive + $y_offset)) 
 $objForm.Controls.Add($objCheckBoxHyperThreading) 
 
+$objGroupBoxCPUCores = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCPUCores.Location = New-Object System.Drawing.Size($columnTwo,$rowFive)
+$objGroupBoxCPUCores.Size = New-Object System.Drawing.Size(180,45)
+$objGroupBoxCPUCores.Font = $GroupBoxFont
+$objGroupBoxCPUCores.Text = "CPU Cores"
+$objForm.Controls.Add($objGroupBoxCPUCores)
 
-# CPU Speed Text Box (Col1)(Row7)
-$objLabelCPUSpeed = New-Object System.Windows.Forms.Label
-$objLabelCPUSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowSeven) 
-$objLabelCPUSpeed.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelCPUSpeed.Text = "CPU Speed"
-$objLabelCPUSpeed.Font = "Arial"
-$objForm.Controls.Add($objLabelCPUSpeed) 
-
+# CPU Speed Text Box
 $objTextBoxCPUSpeed = New-Object System.Windows.Forms.TextBox 
-$objTextBoxCPUSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowSeven + 15)) 
-$objTextBoxCPUSpeed.Size = New-Object System.Drawing.Size(100,20) 
-$objTextBoxCPUSpeed.Font = "Arial"
+$objTextBoxCPUSpeed.Location = New-Object System.Drawing.Size(($columnOne + $x_offset),($rowSix + $y_offset)) 
+$objTextBoxCPUSpeed.Size = New-Object System.Drawing.Size(50,20) 
+$objTextBoxCPUSpeed.Font = $TextBoxFont
 $objForm.Controls.Add($objTextBoxCPUSpeed) 
 
+$objGroupBoxCPUSpeed = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCPUSpeed.Location = New-Object System.Drawing.Size($columnOne,$rowSix)
+$objGroupBoxCPUSpeed.Size = New-Object System.Drawing.Size(100,45)
+$objGroupBoxCPUSpeed.Font = $GroupBoxFont
+$objGroupBoxCPUSpeed.Text = "CPU Speed"
+$objForm.Controls.Add($objGroupBoxCPUSpeed)
 
-# CPU Family Combo Box (Col2)(Row7)
-$objLabelCPUFamily = New-Object System.Windows.Forms.Label
-$objLabelCPUFamily.Location = New-Object System.Drawing.Size($columnTwo,$rowSeven) 
-$objLabelCPUFamily.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelCPUFamily.Text = "CPU Family"
-$objLabelCPUFamily.Font = "Arial"
-$objForm.Controls.Add($objLabelCPUFamily) 
 
-$objComboBoxCPUFamily = New-Object System.Windows.Forms.ComboBox
-$objComboBoxCPUFamily.Location = New-Object System.Drawing.Size($columnTwo,($rowSeven + 15))
-$objComboBoxCPUFamily.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxCPUFamily.Font = "Arial"
+# CPU Type Combo Box
+$objComboBoxCPUType = New-Object System.Windows.Forms.ComboBox
+$objComboBoxCPUType.Location = New-Object System.Drawing.Size(($columnTwo + (2 * $x_offset)),($rowSix + $y_offset))
+$objComboBoxCPUType.Size = New-Object System.Drawing.Size(180,20)
+$objComboBoxCPUType.Font = $TextBoxFont
 
-[void] $objComboBoxCPUFamily.Items.Add("Core 2 Duo")
-[void] $objComboBoxCPUFamily.Items.Add("Core i3")
-[void] $objComboBoxCPUFamily.Items.Add("Core i5")
-[void] $objComboBoxCPUFamily.Items.Add("Core i7")
+[void] $objComboBoxCPUType.Items.Add("Core 2 Duo")
+[void] $objComboBoxCPUType.Items.Add("Core i3")
+[void] $objComboBoxCPUType.Items.Add("Core i5")
+[void] $objComboBoxCPUType.Items.Add("Core i7")
 
-$objForm.Controls.Add($objComboBoxCPUFamily) 
+$objForm.Controls.Add($objComboBoxCPUType) 
 
+$objGroupBoxCPUType = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxCPUType.Location = New-Object System.Drawing.Size(($columnTwo + $x_offset),$rowSix)
+$objGroupBoxCPUType.Size = New-Object System.Drawing.Size(200,45)
+$objGroupBoxCPUType.Font = $GroupBoxFont
+$objGroupBoxCPUType.Text = "CPU Type"
+$objForm.Controls.Add($objGroupBoxCPUType)
 
 # CPU Bus Speed Text Box (Col1)(Row8)
 $objLabelBusSpeed = New-Object System.Windows.Forms.Label
-$objLabelBusSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowEight) 
+$objLabelBusSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowSeven) 
 $objLabelBusSpeed.Size = New-Object System.Drawing.Size(100,15) 
 $objLabelBusSpeed.Text = "Bus Speed"
 $objLabelBusSpeed.Font = "Arial"
 $objForm.Controls.Add($objLabelBusSpeed) 
 
 $objTextBoxBusSpeed = New-Object System.Windows.Forms.TextBox 
-$objTextBoxBusSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowEight + 15)) 
+$objTextBoxBusSpeed.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowSeven + 15)) 
 $objTextBoxBusSpeed.Size = New-Object System.Drawing.Size(100,20) 
 $objTextBoxBusSpeed.Font = "Arial"
 $objForm.Controls.Add($objTextBoxBusSpeed) 
@@ -360,110 +352,100 @@ $objForm.Controls.Add($objTextBoxBusSpeed)
 
 # CPU Name Text Box (Col2)(Row8)
 $objLabelCPUName = New-Object System.Windows.Forms.Label
-$objLabelCPUName.Location = New-Object System.Drawing.Size($columnTwo,$rowEight) 
+$objLabelCPUName.Location = New-Object System.Drawing.Size($columnTwo,$rowSeven) 
 $objLabelCPUName.Size = New-Object System.Drawing.Size(100,15) 
 $objLabelCPUName.Text = "CPU Name"
 $objLabelCPUName.Font = "Arial"
 $objForm.Controls.Add($objLabelCPUName) 
 
 $objTextBoxCPUName = New-Object System.Windows.Forms.TextBox 
-$objTextBoxCPUName.Location = New-Object System.Drawing.Size($columnTwo,($rowEight + 15)) 
+$objTextBoxCPUName.Location = New-Object System.Drawing.Size($columnTwo,($rowSeven + 15)) 
 $objTextBoxCPUName.Size = New-Object System.Drawing.Size(100,20) 
 $objTextBoxCPUName.Font = "Arial"
 $objForm.Controls.Add($objTextBoxCPUName) 
 
 
-# CPU Group Box
-$objGroupBoxCPU = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxCPU.Location = New-Object System.Drawing.Size($columnOne,$rowFive)
-$objGroupBoxCPU.Size = New-Object System.Drawing.Size(290,170)
-$objGroupBoxCPU.Font = "Arial"
-$objGroupBoxCPU.Text = "CPU"
+# Memory Size
+$objLabelMemorySize = New-Object System.Windows.Forms.Label
+$objLabelMemorySize.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowEight) 
+$objLabelMemorySize.Size = New-Object System.Drawing.Size(100,15) 
+$objLabelMemorySize.Text = "Memory Size"
+$objLabelMemorySize.Font = "Arial"
+$objForm.Controls.Add($objLabelMemorySize) 
 
-$objForm.Controls.Add($objGroupBoxCPU)
+$objComboBoxMemorySize = New-Object System.Windows.Forms.ComboBox
+$objComboBoxMemorySize.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowEight + 15))
+$objComboBoxMemorySize.Size = New-Object System.Drawing.Size(100,20)
+$objComboBoxMemorySize.Font = "Arial"
 
+[void] $objComboBoxMemorySize.Items.Add("1 GB")
+[void] $objComboBoxMemorySize.Items.Add("2 GB")
+[void] $objComboBoxMemorySize.Items.Add("3 GB")
+[void] $objComboBoxMemorySize.Items.Add("4 GB")
 
-# RAM Size (Col1)(Row10)
-$objLabelRAMSize = New-Object System.Windows.Forms.Label
-$objLabelRAMSize.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowTen) 
-$objLabelRAMSize.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelRAMSize.Text = "RAM Size"
-$objLabelRAMSize.Font = "Arial"
-$objForm.Controls.Add($objLabelRAMSize) 
-
-$objComboBoxRAMSize = New-Object System.Windows.Forms.ComboBox
-$objComboBoxRAMSize.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowTen + 15))
-$objComboBoxRAMSize.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxRAMSize.Font = "Arial"
-
-[void] $objComboBoxRAMSize.Items.Add("1 GB")
-[void] $objComboBoxRAMSize.Items.Add("2 GB")
-[void] $objComboBoxRAMSize.Items.Add("3 GB")
-[void] $objComboBoxRAMSize.Items.Add("4 GB")
-
-$objForm.Controls.Add($objComboBoxRAMSize) 
+$objForm.Controls.Add($objComboBoxMemorySize) 
 
 
-# RAM Type (Col2)(Row10)
-$objLabelRAMType = New-Object System.Windows.Forms.Label
-$objLabelRAMType.Location = New-Object System.Drawing.Size($columnTwo,$rowTen) 
-$objLabelRAMType.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelRAMType.Text = "RAM Type"
-$objLabelRAMType.Font = "Arial"
-$objForm.Controls.Add($objLabelRAMType) 
+# Memory Type
+$objLabelMemoryType = New-Object System.Windows.Forms.Label
+$objLabelMemoryType.Location = New-Object System.Drawing.Size($columnTwo,$rowEight) 
+$objLabelMemoryType.Size = New-Object System.Drawing.Size(100,15) 
+$objLabelMemoryType.Text = "Memory Type"
+$objLabelMemoryType.Font = "Arial"
+$objForm.Controls.Add($objLabelMemoryType) 
 
-$objComboBoxRAMType = New-Object System.Windows.Forms.ComboBox
-$objComboBoxRAMType.Location = New-Object System.Drawing.Size($columnTwo,($rowTen + 15))
-$objComboBoxRAMType.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxRAMType.Font = "Arial"
+$objComboBoxMemoryType = New-Object System.Windows.Forms.ComboBox
+$objComboBoxMemoryType.Location = New-Object System.Drawing.Size($columnTwo,($rowEight + 15))
+$objComboBoxMemoryType.Size = New-Object System.Drawing.Size(100,20)
+$objComboBoxMemoryType.Font = "Arial"
 
-[void] $objComboBoxRAMType.Items.Add("DDR")
-[void] $objComboBoxRAMType.Items.Add("DDR2")
-[void] $objComboBoxRAMType.Items.Add("DDR3")
+[void] $objComboBoxMemoryType.Items.Add("DDR")
+[void] $objComboBoxMemoryType.Items.Add("DDR2")
+[void] $objComboBoxMemoryType.Items.Add("DDR3")
 
-$objForm.Controls.Add($objComboBoxRAMType) 
-
-
-# RAM Name (Col1)(Row11)
-$objLabelRAMName = New-Object System.Windows.Forms.Label
-$objLabelRAMName.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowEleven) 
-$objLabelRAMName.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelRAMName.Text = "RAM Name"
-$objLabelRAMName.Font = "Arial"
-$objForm.Controls.Add($objLabelRAMName) 
-
-$objComboBoxRAMName = New-Object System.Windows.Forms.ComboBox
-$objComboBoxRAMName.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowEleven + 15))
-$objComboBoxRAMName.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxRAMName.Font = "Arial"
-
-[void] $objComboBoxRAMName.Items.Add("PC2-8500")
-[void] $objComboBoxRAMName.Items.Add("PC2-10600")
-[void] $objComboBoxRAMName.Items.Add("PC3-8500")
-[void] $objComboBoxRAMName.Items.Add("PC3-10600")
-
-$objForm.Controls.Add($objComboBoxRAMName) 
+$objForm.Controls.Add($objComboBoxMemoryType) 
 
 
-# RAM Speed (Col2)(Row11)
-$objLabelRAMSpeed = New-Object System.Windows.Forms.Label
-$objLabelRAMSpeed.Location = New-Object System.Drawing.Size($columnTwo,$rowEleven) 
-$objLabelRAMSpeed.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelRAMSpeed.Text = "RAM Speed"
-$objLabelRAMSpeed.Font = "Arial"
-$objForm.Controls.Add($objLabelRAMSpeed) 
+# Memory Rating
+$objLabelMemoryRating = New-Object System.Windows.Forms.Label
+$objLabelMemoryRating.Location = New-Object System.Drawing.Size(($columnOne + 5),$rowNine) 
+$objLabelMemoryRating.Size = New-Object System.Drawing.Size(100,15) 
+$objLabelMemoryRating.Text = "Memory Rating"
+$objLabelMemoryRating.Font = "Arial"
+$objForm.Controls.Add($objLabelMemoryRating) 
 
-$objComboBoxRAMSpeed = New-Object System.Windows.Forms.ComboBox
-$objComboBoxRAMSpeed.Location = New-Object System.Drawing.Size($columnTwo,($rowEleven + 15))
-$objComboBoxRAMSpeed.Size = New-Object System.Drawing.Size(100,20)
-$objComboBoxRAMSpeed.Font = "Arial"
+$objComboBoxMemoryRating = New-Object System.Windows.Forms.ComboBox
+$objComboBoxMemoryRating.Location = New-Object System.Drawing.Size(($columnOne + 5),($rowNine + 15))
+$objComboBoxMemoryRating.Size = New-Object System.Drawing.Size(100,20)
+$objComboBoxMemoryRating.Font = "Arial"
 
-[void] $objComboBoxRAMSpeed.Items.Add("667")
-[void] $objComboBoxRAMSpeed.Items.Add("800")
-[void] $objComboBoxRAMSpeed.Items.Add("1066")
-[void] $objComboBoxRAMSpeed.Items.Add("1333")
+[void] $objComboBoxMemoryRating.Items.Add("PC2-8500")
+[void] $objComboBoxMemoryRating.Items.Add("PC2-10600")
+[void] $objComboBoxMemoryRating.Items.Add("PC3-8500")
+[void] $objComboBoxMemoryRating.Items.Add("PC3-10600")
 
-$objForm.Controls.Add($objComboBoxRAMSpeed) 
+$objForm.Controls.Add($objComboBoxMemoryRating) 
+
+
+# Memory Speed
+$objLabelMemorySpeed = New-Object System.Windows.Forms.Label
+$objLabelMemorySpeed.Location = New-Object System.Drawing.Size($columnTwo,$rowNine) 
+$objLabelMemorySpeed.Size = New-Object System.Drawing.Size(100,15) 
+$objLabelMemorySpeed.Text = "Memory Speed"
+$objLabelMemorySpeed.Font = "Arial"
+$objForm.Controls.Add($objLabelMemorySpeed) 
+
+$objComboBoxMemorySpeed = New-Object System.Windows.Forms.ComboBox
+$objComboBoxMemorySpeed.Location = New-Object System.Drawing.Size($columnTwo,($rowNine + 15))
+$objComboBoxMemorySpeed.Size = New-Object System.Drawing.Size(100,20)
+$objComboBoxMemorySpeed.Font = "Arial"
+
+[void] $objComboBoxMemorySpeed.Items.Add("667")
+[void] $objComboBoxMemorySpeed.Items.Add("800")
+[void] $objComboBoxMemorySpeed.Items.Add("1066")
+[void] $objComboBoxMemorySpeed.Items.Add("1333")
+
+$objForm.Controls.Add($objComboBoxMemorySpeed) 
 
 # HDD (4 Inputs) **************************************
 # Number of HDDs
@@ -576,10 +558,10 @@ $CPUSpeed = $objTextBoxCPUSpeed.Text
 $CPUFamily = $objComboBoxCPUFamily.Text
 $BusSpeed = $objTextBoxBusSpeed.Text
 $CPUName = $objTextBoxCPUName.Text
-$RAMSize = $objComboBoxRAMSize.Text
-$RAMType = $objComboBoxRAMType.Text
-$RAMName = $objComboBoxRAMName.Text
-$RAMSpeed = $objComboBoxRAMSpeed.Text
+$MemorySize = $objComboBoxMemorySize.Text
+$MemoryType = $objComboBoxMemoryType.Text
+$MemoryRating = $objComboBoxMemoryRating.Text
+$MemorySpeed = $objComboBoxMemorySpeed.Text
 
 
 
@@ -600,10 +582,10 @@ $CPUSpeed
 $CPUFamily
 $BusSpeed
 $CPUName
-$RAMSize
-$RAMType
-$RAMName
-$RAMSpeed
+$MemorySize
+$MemoryType
+$MemoryRating
+$MemorySpeed
 
 
 <#
