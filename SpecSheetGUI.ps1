@@ -1,5 +1,6 @@
 $arrConditionComboValues = @("Boots to BIOS", "Power Only", "For Parts", "Untested")
 $arrBrandComboValues = @("Dell", "HP", "IBM", "Other:")
+# Lenovo, Toshiba, Fujitsu, Sony, Apple, MPC, American Dynamics, Sensormatic, Custom
 $arrFormFactorComboValues = @("Laptop"
                               "Tablet Laptop"
                               "Desktop"
@@ -9,6 +10,11 @@ $arrFormFactorComboValues = @("Laptop"
                               "Workstation"
                               "Server"
 )
+# Desktop, SFF Desktop, USFF Desktop, Laptop, Server, Workstation,
+# Motherboard, DVR, Thin Client, Tablet, All-in-One, Slim Desktop, POS, Micro Tower, Tablet Laptop, 
+# Convertable Mini Tower?, Ultra Slim Desktop, Micro PC, Rack Workstation, Mini Tower, Slim Tower
+# Tower Server, Server Blade, Enclosure
+# 8 item selection
 $arrCPUTypeComboValues = @("Core 2 Duo", "Core i3", "Core i5", "Core i7")
 $arrMemorySizeComboValues = @("1GB", 
                               "2GB",
@@ -28,7 +34,7 @@ $arrMemorySpeedComboValues = @("667 MHz", "800 MHz", "1066 MHz", "1333 MHz", "16
 $arrHDDTypeComboValues = @("IDE", "SATA", "SCSI", "SAS", "ZIF", "FLASH", "SSD", "microSATA")
 $arrHDDRPMComboValues = @("Unknown", "4200", "5400", "7200", "10K", "15K", "N/A")
 $arrVideoComboValues = @("Mobile", "Onboard", "PCIe")
-$arrOpticalDriveComboValues = @("None", "CD-ROM", "DVD-ROM", "DVD+/-RW")
+$arrOpticalDriveComboValues = @("None", "CD-ROM", "CD-RW", "DVD-ROM", "CD-RW/DVD", "DVD+/-RW", "Blu-ray")
 $arrWindowsCOAComboValues = @("None", "Windows XP", "Windows Vista", "Win 7 Pro")
 $arrDamageComboValues = @("Grade A", "Grade B", "Grade C", "Grade D", "N/A")
 
