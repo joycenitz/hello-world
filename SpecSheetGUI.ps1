@@ -1443,3 +1443,17 @@ $MemoryRating
 $MemorySpeed
 
 
+
+
+# Desktop.Dell.OptiPlex.780.csv
+# v1.1.2,64842-2-5681,4/22/2015,0,0,6B1KJN1,OptiPlex 780,0,1,2,2.93,1066 MHz FSB,12,2,5,12,1,250,1,3,1,3,3,,N/A,12,8,1,0,1,0,0,0,4,0,1,1,0,0,0,1,0,0,1,E7500,False
+
+
+# Laptop.Dell.Latitude.E6420.csv
+# v1.1.2,66434-2-5000,5/8/2015,0,0,CK0X1Q1,Latitude E6420,3,1,2,2.3,5 GT/s DMI,17,2,8,13,1,250,1,5,5,3,0,Screen: Grade B Matte | Includes AC adapter,14,13,3,1,0,1,0,0,0,1,1,0,0,1,1,0,0,1,0,0,2410M,True
+
+# 8B9TLS1.csv
+# 71921-3-4324, 5/17/2016, Boots to BIOS, Dell, N/A, 8B9TLS1, PowerEdge R510, Server, 2, 6, True, 2.53, Xeon, 5.86 GT/s Intel QPI, E5649, 32gb, PC3-10600, DDR3, 1333MHz, 29, 0, N/A, , , N/A, Onboard, N/A, N/A, None, True, False, False, N/A, False, True, False, False, False, None, True, False, Memory: 8x 4GB, True, False, False, False, False, False, False, False, False, Grade B, 4, 2, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, v1.2.5, cniermeyer
+
+# C4939W1.csv
+# 71460-2-5000, 5/17/2016, Boots to BIOS, Other:, Dell, C4939W1, Latitude E6230, Laptop, 1, 2, True, 2.6, Core i5, 5 GT/s Intel QPI, 3320M, 4gb, PC3-12800, DDR3, 1600MHz, 4, 1, 320, SATA, 7200, W0Q77GSL, Mobile, Intel HD Graphics, 64, None, True, False, False, 12.5, False, True, False, True, False, Win 7 Pro, True, False, Screen: Grade B Matte | Slight scratches on top of unit, False, False, False, True, False, False, True, False, False, Grade B, 2, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, v1.2.4
