@@ -1,20 +1,99 @@
+$ISPF_PO = ""
+$Date = ""
+$Condition = ""
+$Brand = ""
+$BrandOther = ""
+$SerialNumber = ""
+$Model = ""
+$FormFactor = ""
+$CPUQty = ""
+$CPUCores = ""
+$HyperThreading = ""
+$CPUSpeed = ""
+$CPUType = ""
+$BusSpeed = ""
+$CPUName = ""
+$MemorySize = ""
+$MemoryRating = ""
+$MemoryType = ""
+$MemorySpeed = ""
+$Weight = ""
+$HDDQty = ""
+$HDDSize = ""
+$HDDType = ""
+$HDDRPM = ""
+$HDDSerial = ""
+$Video = ""
+$VideoModel = ""
+$VideoRAM = ""
+$OpticalDrive = ""
+$OtherDrivesNone = ""
+$OtherDrivesFDD = ""
+$OtherDrivesTape = ""
+$LCDSize = ""
+$NetworkNone = ""
+$NetworkEthernet = ""
+$NetworkModem = ""
+$NetworkWifi = ""
+$NetworkBluetooth = ""
+$WindowsCOA = ""
+$OSInstallNo = ""
+$OSInstallYes = ""
+$Notes = ""
+$AccessoriesNone = ""
+$AccessoriesACAdapter = ""
+$AccessoriesPowerCord = ""
+$AccessoriesBattery = ""
+$AccessoriesExtendedBattery = ""
+$AccessoriesFingerprintReader = ""
+$AccessoriesWebcam = ""
+$AccessoriesKeyboard = ""
+$AccessoriesMouse = ""
+$Damage = ""
+$PortsUSB = ""
+$PortsEthernet = ""
+$PortsModem = ""
+$PortsVGA = ""
+$PortsDVI = ""
+$PortsSVideo = ""
+$PortsPS2 = ""
+$PortsAudio = ""
+$PortseSATAp = ""
+$PortsSerial = ""
+$PortsParallel = ""
+$PortsPCMCIA = ""
+$PortsSDCard = ""
+$PortsFirewire = ""
+$PortseSATA = ""
+$PortsHDMI = ""
+$PortsSCSI = ""
+$PortsDisplayPort = ""
+$Version = ""
+$Tester = ""
+
+
+
 $arrConditionComboValues = @("Boots to BIOS", "Power Only", "For Parts", "Untested")
+
 $arrBrandComboValues = @("Dell", "HP", "IBM", "Other:")
 # Lenovo, Toshiba, Fujitsu, Sony, Apple, MPC, American Dynamics, Sensormatic, Custom
-$arrFormFactorComboValues = @("Laptop"
-                              "Tablet Laptop"
-                              "Desktop"
+
+$arrFormFactorComboValues = @("Desktop"
                               "SFF Desktop"
                               "USFF Dektop"
-                              "Mini Tower"
-                              "Workstation"
+                              "Laptop"
                               "Server"
+                              "Workstation"
+                              "Tablet Laptop"
+                              "Mini Tower"
 )
+
 # Desktop, SFF Desktop, USFF Desktop, Laptop, Server, Workstation,
 # Motherboard, DVR, Thin Client, Tablet, All-in-One, Slim Desktop, POS, Micro Tower, Tablet Laptop, 
 # Convertable Mini Tower?, Ultra Slim Desktop, Micro PC, Rack Workstation, Mini Tower, Slim Tower
 # Tower Server, Server Blade, Enclosure
 # 8 item selection
+
 $arrCPUTypeComboValues = @("Core 2 Duo", "Core i3", "Core i5", "Core i7")
 $arrMemorySizeComboValues = @("1GB", 
                               "2GB",
@@ -176,16 +255,319 @@ $CancelButton.Add_Click({
 })
 $objForm.Controls.Add($CancelButton)
 
+<#
 $PrintLabelButton = New-Object System.Windows.Forms.Button
 $PrintLabelButton.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowNine + (1 * $y_offset)))
 $PrintLabelButton.Size = New-Object System.Drawing.Size(75,23)
 $PrintLabelButton.Text = "Print Label"
 $PrintLabelButton.Add_Click({
     $printLabel = "Print Label Button Clicked"
-    $printLabel
     Write-Host $printLabel
 })
 $objForm.Controls.Add($PrintLabelButton)
+#>
+
+$SaveSerialCSVButton = New-Object System.Windows.Forms.Button
+$SaveSerialCSVButton.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowNine + (1 * $y_offset)))
+$SaveSerialCSVButton.Size = New-Object System.Drawing.Size(75,23)
+$SaveSerialCSVButton.Text = "Save Serial CSV"
+$SaveSerialCSVButton.Add_Click({
+    # Capture Input from form into variables
+    $ISPF_PO = $objTextBoxISPF_PO.Text
+    $Date = $objLabelDate.Text
+    $Condition = $objComboBoxCondition.Text
+    $Brand = $objComboBoxBrand.Text
+    $BrandOther = $objTextBoxOther.Text
+    $SerialNumber = $objTextBoxSerialNum.Text
+    $Model = $objTextBoxModel.Text
+    $FormFactor = $objComboBoxFormFactor.Text
+    $CPUQty = $objTextBoxCPUQty.Text
+    $CPUCores = $objTextBoxCPUCores.Text
+    $HyperThreading = $objCheckBoxHyperThreading.Checked
+    $CPUSpeed = $objTextBoxCPUSpeed.Text
+    $CPUType = $objComboBoxCPUType.Text
+    $BusSpeed = $objTextBoxBusSpeed.Text
+    $CPUName = $objTextBoxCPUName.Text
+    $MemorySize = $objComboBoxMemorySize.Text
+    $MemoryRating = $objComboBoxMemoryRating.Text
+    $MemoryType = $objComboBoxMemoryType.Text
+    $MemorySpeed = $objComboBoxMemorySpeed.Text
+    $Weight = $objTextBoxWeight.Text
+    $HDDQty = $objTextBoxHDDQty.Text
+    $HDDSize = $objTextBoxHDDSize.Text
+    $HDDType = $objComboBoxHDDType.Text
+    $HDDRPM = $objComboBoxHDDRPM.Text
+    $HDDSerial = $objTextBoxHDDSerial.Text
+    $Video = $objComboBoxVideo.Text
+    $VideoModel = $objTextBoxVideoModel.Text
+    $VideoRAM = $objTextBoxVideoRAM.Text
+    $OpticalDrive = $objComboBoxOpticalDrive.Text
+    $OtherDrivesNone = $objCheckBoxOtherDrivesNone.Checked
+    $OtherDrivesFDD = $objCheckBoxOtherDrivesFDD.Checked
+    $OtherDrivesTape = $objCheckBoxOtherDrivesTape.Checked
+    $LCDSize = $objTextBoxLCDSize.Text
+    $NetworkNone = $objCheckBoxNetworkNone.Checked
+    $NetworkEthernet = $objCheckBoxNetworkEthernet.Checked
+    $NetworkModem = $objCheckBoxNetworkModem.Checked
+    $NetworkWifi = $objCheckBoxNetworkWifi.Checked
+    $NetworkBluetooth = $objCheckBoxNetworkBluetooth.Checked
+    $WindowsCOA = $objComboBoxWindowsCOA.Text
+    $OSInstallNo = $objRadioButtonOSInstalledNo.Checked
+    $OSInstallYes = $objRadioButtonOSInstalledYes.Checked
+    $Notes = $objTextBoxNotes.Text
+    $AccessoriesNone = $objCheckBoxAccessoriesNone.Checked
+    $AccessoriesACAdapter = $objCheckBoxAccessoriesACAdapter.Checked
+    $AccessoriesPowerCord = $objCheckBoxAccessoriesPowerCord.Checked
+    $AccessoriesBattery = $objCheckBoxAccessoriesBattery.Checked
+    $AccessoriesExtendedBattery = $objCheckBoxAccessoriesExtendedBattery.Checked
+    $AccessoriesFingerprintReader = $objCheckBoxAccessoriesFingerprintReader.Checked
+    $AccessoriesWebcam = $objCheckBoxAccessoriesWebcam.Checked
+    $AccessoriesKeyboard = $objCheckBoxAccessoriesKeyboard.Checked
+    $AccessoriesMouse = $objCheckBoxAccessoriesMouse.Checked
+    $Damage = $objComboBoxDamage.Text
+    $PortsUSB = $objTextBoxPortsUSB.Text
+    $PortsEthernet = $objTextBoxPortsEthernet.Text
+    $PortsModem = $objTextBoxPortsModem.Text
+    $PortsVGA = $objTextBoxPortsVGA.Text
+    $PortsDVI = $objTextBoxPortsDVI.Text
+    $PortsSVideo = $objTextBoxPortsSVideo.Text
+    $PortsPS2 = $objTextBoxPortsPS2.Text
+    $PortsAudio = $objTextBoxPortsAudio.Text
+    $PortseSATAp = $objTextBoxPortseSATAp.Text
+    $PortsSerial = $objTextBoxPortsSerial.Text
+    $PortsParallel = $objTextBoxPortsParallel.Text
+    $PortsPCMCIA = $objTextBoxPortsPCMCIA.Text
+    $PortsSDCard = $objTextBoxPortsSDCard.Text
+    $PortsFirewire = $objTextBoxPortsFirewire.Text
+    $PortseSATA = $objTextBoxPortseSATA.Text
+    $PortsHDMI = $objTextBoxPortsHDMI.Text
+    $PortsSCSI = $objTextBoxPortsSCSI.Text
+    $PortsDisplayPort = $objTextBoxPortsDisplayPort.Text
+    $Version = "TBD"
+    $Tester = $objTextBoxTester.Text
+
+    # Display variables
+    Write-Host $ISPF_PO
+    Write-Host $Date
+    Write-Host $Condition
+    Write-Host $Brand
+    Write-Host $BrandOther
+    Write-Host $SerialNumber
+    Write-Host $Model
+    Write-Host $FormFactor
+    Write-Host $CPUQty
+    Write-Host $CPUCores
+    Write-Host $HyperThreading
+    Write-Host $CPUSpeed
+    Write-Host $CPUType
+    Write-Host $BusSpeed
+    Write-Host $CPUName
+    Write-Host $MemorySize
+    Write-Host $MemoryRating
+    Write-Host $MemoryType
+    Write-Host $MemorySpeed
+    Write-Host $Weight
+    Write-Host $HDDQty
+    Write-Host $HDDSize
+    Write-Host $HDDType
+    Write-Host $HDDRPM
+    Write-Host $HDDSerial
+    Write-Host $Video
+    Write-Host $VideoModel
+    Write-Host $VideoRAM
+    Write-Host $OpticalDrive
+    Write-Host $OtherDrivesNone
+    Write-Host $OtherDrivesFDD
+    Write-Host $OtherDrivesTape
+    Write-Host $LCDSize
+    Write-Host $NetworkNone
+    Write-Host $NetworkEthernet
+    Write-Host $NetworkModem
+    Write-Host $NetworkWifi
+    Write-Host $NetworkBluetooth
+    Write-Host $WindowsCOA
+    Write-Host $OSInstallNo
+    Write-Host $OSInstallYes
+    Write-Host $Notes
+    Write-Host $AccessoriesNone
+    Write-Host $AccessoriesACAdapter
+    Write-Host $AccessoriesPowerCord
+    Write-Host $AccessoriesBattery
+    Write-Host $AccessoriesExtendedBattery
+    Write-Host $AccessoriesFingerprintReader
+    Write-Host $AccessoriesWebcam
+    Write-Host $AccessoriesKeyboard
+    Write-Host $AccessoriesMouse
+    Write-Host $Damage
+    Write-Host $PortsUSB
+    Write-Host $PortsEthernet
+    Write-Host $PortsModem
+    Write-Host $PortsVGA
+    Write-Host $PortsDVI
+    Write-Host $PortsSVideo
+    Write-Host $PortsPS2
+    Write-Host $PortsAudio
+    Write-Host $PortseSATAp
+    Write-Host $PortsSerial
+    Write-Host $PortsParallel
+    Write-Host $PortsPCMCIA
+    Write-Host $PortsSDCard
+    Write-Host $PortsFirewire
+    Write-Host $PortseSATA
+    Write-Host $PortsHDMI
+    Write-Host $PortsSCSI
+    Write-Host $PortsDisplayPort
+    Write-Host $Version
+    Write-Host $Tester
+
+    $ISPF_PO + 
+    ", " + 
+    $Date +  
+    ", " + 
+    $Condition +
+    ", " + 
+    $Brand + 
+    ", " + 
+    $BrandOther + 
+    ", " + 
+    $SerialNumber + 
+    ", " + 
+    $Model + 
+    ", " + 
+    $FormFactor + 
+    ", " + 
+    $CPUQty + 
+    ", " + 
+    $CPUCores + 
+    ", " + 
+    $HyperThreading + 
+    ", " + 
+    $CPUSpeed + 
+    ", " + 
+    $CPUType + 
+    ", " + 
+    $BusSpeed + 
+    ", " + 
+    $CPUName + 
+    ", " + 
+    $MemorySize + 
+    ", " + 
+    $MemoryRating + 
+    ", " + 
+    $MemoryType + 
+    ", " + 
+    $MemorySpeed + 
+    ", " + 
+    $Weight + 
+    ", " + 
+    $HDDQty + 
+    ", " + 
+    $HDDSize + 
+    ", " + 
+    $HDDType + 
+    ", " + 
+    $HDDRPM + 
+    ", " + 
+    $HDDSerial + 
+    ", " + 
+    $Video + 
+    ", " + 
+    $VideoModel + 
+    ", " + 
+    $VideoRAM + 
+    ", " + 
+    $OpticalDrive + 
+    ", " + 
+    $OtherDrivesNone + 
+    ", " + 
+    $OtherDrivesFDD + 
+    ", " + 
+    $OtherDrivesTape + 
+    ", " + 
+    $LCDSize + 
+    ", " + 
+    $NetworkNone + 
+    ", " + 
+    $NetworkEthernet + 
+    ", " + 
+    $NetworkModem + 
+    ", " + 
+    $NetworkWifi + 
+    ", " + 
+    $NetworkBluetooth + 
+    ", " + 
+    $WindowsCOA + 
+    ", " + 
+    $OSInstallNo + 
+    ", " + 
+    $OSInstallYes + 
+    ", " + 
+    $Notes + 
+    ", " + 
+    $AccessoriesNone + 
+    ", " + 
+    $AccessoriesACAdapter + 
+    ", " + 
+    $AccessoriesPowerCord + 
+    ", " + 
+    $AccessoriesBattery + 
+    ", " + 
+    $AccessoriesExtendedBattery + 
+    ", " + 
+    $AccessoriesFingerprintReader + 
+    ", " + 
+    $AccessoriesWebcam + 
+    ", " + 
+    $AccessoriesKeyboard + 
+    ", " + 
+    $AccessoriesMouse + 
+    ", " + 
+    $Damage + 
+    ", " + 
+    $PortsUSB + 
+    ", " + 
+    $PortsEthernet + 
+    ", " + 
+    $PortsModem + 
+    ", " + 
+    $PortsVGA + 
+    ", " + 
+    $PortsDVI + 
+    ", " + 
+    $PortsSVideo + 
+    ", " + 
+    $PortsPS2 + 
+    ", " + 
+    $PortsAudio + 
+    ", " + 
+    $PortseSATAp + 
+    ", " + 
+    $PortsSerial + 
+    ", " + 
+    $PortsParallel + 
+    ", " + 
+    $PortsPCMCIA + 
+    ", " + 
+    $PortsSDCard + 
+    ", " + 
+    $PortsFirewire + 
+    ", " + 
+    $PortseSATA + 
+    ", " + 
+    $PortsHDMI + 
+    ", " + 
+    $PortsSCSI + 
+    ", " + 
+    $PortsDisplayPort + 
+    ", " + 
+    $Version + 
+    ", " + 
+    $Tester | Out-File -FilePath .\$SerialNumber.csv
+    
+
+    #Export-Csv -LiteralPath $WorkFile -NoTypeInformation -Encoding UTF8 Invoke-Item -Path $WorkFile
+})
+$objForm.Controls.Add($SaveSerialCSVButton)
 
 
 #Title
@@ -570,18 +952,18 @@ $objGroupBoxHDDQty.Text = "HDD Qty"
 $objForm.Controls.Add($objGroupBoxHDDQty)
 
 # HDD Size
-$objTextBoxBusSpeed = New-Object System.Windows.Forms.TextBox 
-$objTextBoxBusSpeed.Location = New-Object System.Drawing.Size(($columnSix + $x_offset),($rowTwo + $y_offset)) 
-$objTextBoxBusSpeed.Size = New-Object System.Drawing.Size(50,20) 
-$objTextBoxBusSpeed.Font = $TextBoxFont
-$objForm.Controls.Add($objTextBoxBusSpeed) 
+$objTextBoxHDDSize = New-Object System.Windows.Forms.TextBox 
+$objTextBoxHDDSize.Location = New-Object System.Drawing.Size(($columnSix + $x_offset),($rowTwo + $y_offset)) 
+$objTextBoxHDDSize.Size = New-Object System.Drawing.Size(50,20) 
+$objTextBoxHDDSize.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxHDDSize) 
 
-$objGroupBoxBusSpeed = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxBusSpeed.Location = New-Object System.Drawing.Size($columnSix,$rowTwo)
-$objGroupBoxBusSpeed.Size = New-Object System.Drawing.Size(85,45)
-$objGroupBoxBusSpeed.Font = $GroupBoxFont
-$objGroupBoxBusSpeed.Text = "HDD Size"
-$objForm.Controls.Add($objGroupBoxBusSpeed)
+$objGroupBoxHDDSize = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxHDDSize.Location = New-Object System.Drawing.Size($columnSix,$rowTwo)
+$objGroupBoxHDDSize.Size = New-Object System.Drawing.Size(85,45)
+$objGroupBoxHDDSize.Font = $GroupBoxFont
+$objGroupBoxHDDSize.Text = "HDD Size"
+$objForm.Controls.Add($objGroupBoxHDDSize)
 
 # HDD Type
 $objComboBoxHDDType = New-Object System.Windows.Forms.ComboBox
@@ -622,18 +1004,18 @@ $objGroupBoxHDDRPM.Text = "HDD RPM"
 $objForm.Controls.Add($objGroupBoxHDDRPM)
 
 # HDD Serial
-$objTextBoxBusSpeed = New-Object System.Windows.Forms.TextBox 
-$objTextBoxBusSpeed.Location = New-Object System.Drawing.Size(($columnNine + $x_offset),($rowTwo + $y_offset)) 
-$objTextBoxBusSpeed.Size = New-Object System.Drawing.Size(100,20) 
-$objTextBoxBusSpeed.Font = $TextBoxFont
-$objForm.Controls.Add($objTextBoxBusSpeed) 
+$objTextBoxHDDSerial = New-Object System.Windows.Forms.TextBox 
+$objTextBoxHDDSerial.Location = New-Object System.Drawing.Size(($columnNine + $x_offset),($rowTwo + $y_offset)) 
+$objTextBoxHDDSerial.Size = New-Object System.Drawing.Size(100,20) 
+$objTextBoxHDDSerial.Font = $TextBoxFont
+$objForm.Controls.Add($objTextBoxHDDSerial) 
 
-$objGroupBoxBusSpeed = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxBusSpeed.Location = New-Object System.Drawing.Size($columnNine,$rowTwo)
-$objGroupBoxBusSpeed.Size = New-Object System.Drawing.Size(120,45)
-$objGroupBoxBusSpeed.Font = $GroupBoxFont
-$objGroupBoxBusSpeed.Text = "HDD Serial"
-$objForm.Controls.Add($objGroupBoxBusSpeed)
+$objGroupBoxHDDSerial = New-Object System.Windows.Forms.GroupBox
+$objGroupBoxHDDSerial.Location = New-Object System.Drawing.Size($columnNine,$rowTwo)
+$objGroupBoxHDDSerial.Size = New-Object System.Drawing.Size(120,45)
+$objGroupBoxHDDSerial.Font = $GroupBoxFont
+$objGroupBoxHDDSerial.Text = "HDD Serial"
+$objForm.Controls.Add($objGroupBoxHDDSerial)
 
 # Video (3 Inputs) ************************************
 # Video Combo Box
@@ -1386,28 +1768,78 @@ if ($objComboBoxBrand.Text -eq "Other:") {
 }
 
 # Capture Input from form into variables
-$Tester = $objTextBoxTester.Text
 $ISPF_PO = $objTextBoxISPF_PO.Text
 $Date = $objLabelDate.Text
 $Condition = $objComboBoxCondition.Text
-$Weight = $objTextBoxWeight.Text
-$SerialNum = $objTextBoxSerialNum.Text
+$Brand = $objComboBoxBrand.Text
+$BrandOther = $objTextBoxOther.Text
+$SerialNumber = $objTextBoxSerialNum.Text
 $Model = $objTextBoxModel.Text
 $FormFactor = $objComboBoxFormFactor.Text
 $CPUQty = $objTextBoxCPUQty.Text
-$NumCores = $objTextBoxNumCores.Text
+$CPUCores = $objTextBoxCPUCores.Text
 $HyperThreading = $objCheckBoxHyperThreading.Checked
 $CPUSpeed = $objTextBoxCPUSpeed.Text
-$CPUFamily = $objComboBoxCPUFamily.Text
+$CPUType = $objComboBoxCPUType.Text
 $BusSpeed = $objTextBoxBusSpeed.Text
 $CPUName = $objTextBoxCPUName.Text
 $MemorySize = $objComboBoxMemorySize.Text
-$MemoryType = $objComboBoxMemoryType.Text
 $MemoryRating = $objComboBoxMemoryRating.Text
+$MemoryType = $objComboBoxMemoryType.Text
 $MemorySpeed = $objComboBoxMemorySpeed.Text
-
-
-
+$Weight = $objTextBoxWeight.Text
+$HDDQty = $objTextBoxHDDQty.Text
+$HDDSize = $objTextBoxHDDSize.Text
+$HDDType = $objComboBoxHDDType.Text
+$HDDRPM = $objComboBoxHDDRPM.Text
+$HDDSerial = $objTextBoxHDDSerial.Text
+$Video = $objComboBoxVideo.Text
+$VideoModel = $objTextBoxVideoModel.Text
+$VideoRAM = $objTextBoxVideoRAM.Text
+$OpticalDrive = $objComboBoxOpticalDrive.Text
+$OtherDrivesNone = $objCheckBoxOtherDrivesNone.Checked
+$OtherDrivesFDD = $objCheckBoxOtherDrivesFDD.Checked
+$OtherDrivesTape = $objCheckBoxOtherDrivesTape.Checked
+$LCDSize = $objTextBoxLCDSize.Text
+$NetworkNone = $objCheckBoxNetworkNone.Checked
+$NetworkEthernet = $objCheckBoxNetworkEthernet.Checked
+$NetworkModem = $objCheckBoxNetworkModem.Checked
+$NetworkWifi = $objCheckBoxNetworkWifi.Checked
+$NetworkBluetooth = $objCheckBoxNetworkBluetooth.Checked
+$WindowsCOA = $objComboBoxWindowsCOA.Text
+$OSInstallNo = $objRadioButtonOSInstalledNo.Checked
+$OSInstallYes = $objRadioButtonOSInstalledYes.Checked
+$Notes = $objTextBoxNotes.Text
+$AccessoriesNone = $objCheckBoxAccessoriesNone.Checked
+$AccessoriesACAdapter = $objCheckBoxAccessoriesACAdapter.Checked
+$AccessoriesPowerCord = $objCheckBoxAccessoriesPowerCord.Checked
+$AccessoriesBattery = $objCheckBoxAccessoriesBattery.Checked
+$AccessoriesExtendedBattery = $objCheckBoxAccessoriesExtendedBattery.Checked
+$AccessoriesFingerprintReader = $objCheckBoxAccessoriesFingerprintReader.Checked
+$AccessoriesWebcam = $objCheckBoxAccessoriesWebcam.Checked
+$AccessoriesKeyboard = $objCheckBoxAccessoriesKeyboard.Checked
+$AccessoriesMouse = $objCheckBoxAccessoriesMouse.Checked
+$Damage = $objComboBoxDamage.Text
+$PortsUSB = $objTextBoxPortsUSB.Text
+$PortsEthernet = $objTextBoxPortsEthernet.Text
+$PortsModem = $objTextBoxPortsModem.Text
+$PortsVGA = $objTextBoxPortsVGA.Text
+$PortsDVI = $objTextBoxPortsDVI.Text
+$PortsSVideo = $objTextBoxPortsSVideo.Text
+$PortsPS2 = $objTextBoxPortsPS2.Text
+$PortsAudio = $objTextBoxPortsAudio.Text
+$PortseSATAp = $objTextBoxPortseSATAp.Text
+$PortsSerial = $objTextBoxPortsSerial.Text
+$PortsParallel = $objTextBoxPortsParallel.Text
+$PortsPCMCIA = $objTextBoxPortsPCMCIA.Text
+$PortsSDCard = $objTextBoxPortsSDCard.Text
+$PortsFirewire = $objTextBoxPortsFirewire.Text
+$PortseSATA = $objTextBoxPortseSATA.Text
+$PortsHDMI = $objTextBoxPortsHDMI.Text
+$PortsSCSI = $objTextBoxPortsSCSI.Text
+$PortsDisplayPort = $objTextBoxPortsDisplayPort.Text
+$Version = "TBD"
+$Tester = $objTextBoxTester.Text
 
 #[void] $objForm.Cursor
 
@@ -1421,28 +1853,78 @@ $MemorySpeed = $objComboBoxMemorySpeed.Text
 
 
 # Display variables
-$Tester
 $ISPF_PO
 $Date
 $Condition
-$Weight
 $Brand
-$SerialNum
+$BrandOther
+$SerialNumber
 $Model
 $FormFactor
 $CPUQty
-$NumCores
+$CPUCores
 $HyperThreading
 $CPUSpeed
-$CPUFamily
+$CPUType
 $BusSpeed
 $CPUName
 $MemorySize
-$MemoryType
 $MemoryRating
+$MemoryType
 $MemorySpeed
-
-
+$Weight
+$HDDQty
+$HDDSize
+$HDDType
+$HDDRPM
+$HDDSerial
+$Video
+$VideoModel
+$VideoRAM
+$OpticalDrive
+$OtherDrivesNone
+$OtherDrivesFDD
+$OtherDrivesTape
+$LCDSize
+$NetworkNone
+$NetworkEthernet
+$NetworkModem
+$NetworkWifi
+$NetworkBluetooth
+$WindowsCOA
+$OSInstallNo
+$OSInstallYes
+$Notes
+$AccessoriesNone
+$AccessoriesACAdapter
+$AccessoriesPowerCord
+$AccessoriesBattery
+$AccessoriesExtendedBattery
+$AccessoriesFingerprintReader
+$AccessoriesWebcam
+$AccessoriesKeyboard
+$AccessoriesMouse
+$Damage
+$PortsUSB
+$PortsEthernet
+$PortsModem
+$PortsVGA
+$PortsDVI
+$PortsSVideo
+$PortsPS2
+$PortsAudio
+$PortseSATAp
+$PortsSerial
+$PortsParallel
+$PortsPCMCIA
+$PortsSDCard
+$PortsFirewire
+$PortseSATA
+$PortsHDMI
+$PortsSCSI
+$PortsDisplayPort
+$Version
+$Tester
 
 
 # Desktop.Dell.OptiPlex.780.csv
@@ -1457,3 +1939,58 @@ $MemorySpeed
 
 # C4939W1.csv
 # 71460-2-5000, 5/17/2016, Boots to BIOS, Other:, Dell, C4939W1, Latitude E6230, Laptop, 1, 2, True, 2.6, Core i5, 5 GT/s Intel QPI, 3320M, 4gb, PC3-12800, DDR3, 1600MHz, 4, 1, 320, SATA, 7200, W0Q77GSL, Mobile, Intel HD Graphics, 64, None, True, False, False, 12.5, False, True, False, True, False, Win 7 Pro, True, False, Screen: Grade B Matte | Slight scratches on top of unit, False, False, False, True, False, False, True, False, False, Grade B, 2, 1, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 0, v1.2.4
+
+
+<#
+# 8B9TLS1.csv
+# 71921-3-4324, 5/17/2016, Boots to BIOS, Dell, N/A, 8B9TLS1, PowerEdge R510, Server, 
+2, 6, True, 2.53, Xeon, 5.86 GT/s Intel QPI, E5649, 
+32gb, PC3-10600, DDR3, 1333MHz, 29, 
+0, N/A, , , N/A, 
+Onboard, N/A, N/A, None, 
+True, False, False, N/A, 
+False, True, False, False, False, 
+None, True, False, 
+Memory: 8x 4GB, 
+True, False, False, False, False, 
+False, False, False, False, 
+Grade B, 
+4, 2, 0, 2, 0, 0, 0, 0, 0, 
+1, 0, 0, 0, 0, 0, 0, 0, 0, 
+v1.2.5, cniermeyer
+
+# C4939W1.csv
+# 71460-2-5000, 5/17/2016, Boots to BIOS, Other:, Dell, C4939W1, Latitude E6230, Laptop, 
+1, 2, True, 2.6, Core i5, 5 GT/s Intel QPI, 3320M, 
+4gb, PC3-12800, DDR3, 1600MHz, 4, 
+1, 320, SATA, 7200, W0Q77GSL, 
+Mobile, Intel HD Graphics, 64, None, 
+True, False, False, 12.5, 
+False, True, False, True, False, 
+Win 7 Pro, True, False, 
+Screen: Grade B Matte | Slight scratches on top of unit, 
+False, False, False, True, False, 
+False, True, False, False, 
+Grade B, 
+2, 1, 0, 1, 0, 0, 0, 1, 1, 
+0, 0, 0, 1, 0, 0, 1, 0, 0, 
+v1.2.4
+#>
+
+<#
+$ISPF_PO, $Date, $Condition, $Brand, $BrandOther, $SerialNumber, $Model, $FormFactor, 
+$CPUQty, $CPUCores, $HyperThreading, $CPUSpeed, $CPUType, $BusSpeed, $CPUName, 
+$MemorySize, $MemoryRating, $MemoryType, $MemorySpeed, $Weight, 
+$HDDQty, $HDDSize, $HDDType, $HDDRPM, $HDDSerial, 
+$Video, $VideoModel, $VideoRAM, $OpticalDrive, 
+$OtherDrivesNone, $OtherDrivesFDD, $OtherDrivesTape, $LCDSize, 
+$NetworkNone, $NetworkEthernet, $NetworkModem, $NetworkWifi, $NetworkBluetooth,
+$WindowsCOA, $OSInstallNo, $OSInstallYes, 
+$Notes, 
+$AccessoriesNone, $AccessoriesACAdapter, $AccessoriesPowerCord, $AccessoriesBattery, $AccessoriesExtendedBattery, 
+$AccessoriesFingerprintReader, $AccessoriesWebcam, $AccessoriesKeyboard, $AccessoriesMouse
+$Damage
+$PortsUSB, $PortsEthernet, $PortsModem, $PortsVGA, $PortsDVI, $PortsSVideo, $PortsPS2, $PortsAudio, $PortseSATAp,
+$PortsSerial, $PortsParallel, $PortsPCMCIA, $PortsSDCard, $PortsFirewire, $PortseSATA, $PortsHDMI, $PortsSCSI, $PortsDisplayPort
+$Version, $Tester
+#>
