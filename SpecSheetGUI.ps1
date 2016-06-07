@@ -2,12 +2,12 @@ $ISPF_PO = ""
 $Date = ""
 $Condition = ""
 $Brand = ""
-$BrandOther = ""
+$BrandOther = "N/A"
 $SerialNumber = ""
 $Model = ""
 $FormFactor = ""
-$CPUQty = ""
-$CPUCores = ""
+$CPUQty = "1"
+$CPUCores = "1"
 $HyperThreading = ""
 $CPUSpeed = ""
 $CPUType = ""
@@ -18,19 +18,19 @@ $MemoryRating = ""
 $MemoryType = ""
 $MemorySpeed = ""
 $Weight = ""
-$HDDQty = ""
+$HDDQty = "0"
 $HDDSize = ""
 $HDDType = ""
 $HDDRPM = ""
 $HDDSerial = ""
 $Video = ""
-$VideoModel = ""
-$VideoRAM = ""
+$VideoModel = "N/A"
+$VideoRAM = "N/A"
 $OpticalDrive = ""
 $OtherDrivesNone = ""
 $OtherDrivesFDD = ""
 $OtherDrivesTape = ""
-$LCDSize = ""
+$LCDSize = "N/A"
 $NetworkNone = ""
 $NetworkEthernet = ""
 $NetworkModem = ""
@@ -68,19 +68,19 @@ $PortseSATA = ""
 $PortsHDMI = ""
 $PortsSCSI = ""
 $PortsDisplayPort = ""
-$Version = ""
+$Version = "v1.1.4"
 $Tester = ""
 
 
 
 $arrConditionComboValues = @("Boots to BIOS", "Power Only", "For Parts", "Untested")
 
-$arrBrandComboValues = @("Dell", "HP", "IBM", "Other:")
+$arrBrandComboValues = @("Dell", "HP", "IBM", "Lenovo", "Other:")
 # Lenovo, Toshiba, Fujitsu, Sony, Apple, MPC, American Dynamics, Sensormatic, Custom
 
 $arrFormFactorComboValues = @("Desktop"
                               "SFF Desktop"
-                              "USFF Dektop"
+                              "USFF Desktop"
                               "Laptop"
                               "Server"
                               "Workstation"
@@ -94,27 +94,32 @@ $arrFormFactorComboValues = @("Desktop"
 # Tower Server, Server Blade, Enclosure
 # 8 item selection
 
-$arrCPUTypeComboValues = @("Core 2 Duo", "Core i3", "Core i5", "Core i7")
-$arrMemorySizeComboValues = @("1GB", 
-                              "2GB",
-                              "3GB",
-                              "4GB",
-                              "6GB",
-                              "8GB",
-                              "10GB",
-                              "12GB",
-                              "16GB",
-                              "32GB",
-                              "64GB"
+$arrCPUTypeComboValues = @("Core 2 Duo", "Core 2 Quad", "Core i3", "Core i5", "Core i7")
+$arrMemorySizeComboValues = @("1gb", 
+                              "2gb",
+                              "3gb",
+                              "4gb",
+                              "6gb",
+                              "8gb",
+                              "10gb",
+                              "12gb",
+                              "16gb",
+                              "32gb",
+                              "64gb"
 )
 $arrMemoryTypeComboValues = @("DDR", "DDR2", "DDR3")
-$arrMemoryRatingComboValues = @("PC3-8500", "PC3-10600")
-$arrMemorySpeedComboValues = @("667 MHz", "800 MHz", "1066 MHz", "1333 MHz", "1666 MHz")
+$arrMemoryRatingComboValues = @("PC2-5300", "PC2-6400","PC3-8500", "PC3-10600")
+$arrMemorySpeedComboValues = @("667MHz", "800MHz", "1066MHz", "1333MHz", "1666MHz")
 $arrHDDTypeComboValues = @("IDE", "SATA", "SCSI", "SAS", "ZIF", "FLASH", "SSD", "microSATA")
 $arrHDDRPMComboValues = @("Unknown", "4200", "5400", "7200", "10K", "15K", "N/A")
 $arrVideoComboValues = @("Mobile", "Onboard", "PCIe")
-$arrOpticalDriveComboValues = @("None", "CD-ROM", "CD-RW", "DVD-ROM", "CD-RW/DVD", "DVD+/-RW", "Blu-ray")
-$arrWindowsCOAComboValues = @("None", "Windows XP", "Windows Vista", "Win 7 Pro")
+
+
+$arrOpticalDriveComboValues = @("None", "CD-ROM", "CD-RW", "DVD-ROM", "CD-RW/DVD", "DVD±RW", "Blu-ray")
+
+# +/- ALT 241
+
+$arrWindowsCOAComboValues = @("None", "Win XP Pro", "Win Vista Business", "Win 7 Pro")
 $arrDamageComboValues = @("Grade A", "Grade B", "Grade C", "Grade D", "N/A")
 
 $hashOtherDrivesCheckValues = @{"None" = "$true" 
@@ -343,7 +348,7 @@ $SaveSerialCSVButton.Add_Click({
     $PortsHDMI = $objTextBoxPortsHDMI.Text
     $PortsSCSI = $objTextBoxPortsSCSI.Text
     $PortsDisplayPort = $objTextBoxPortsDisplayPort.Text
-    $Version = "TBD"
+    #$Version = "TBD"
     $Tester = $objTextBoxTester.Text
 
     # Display variables
@@ -420,8 +425,10 @@ $SaveSerialCSVButton.Add_Click({
     Write-Host $Version
     Write-Host $Tester
 
-    $ISPF_PO + 
-    ", " + 
+
+    $outputString = "" + 
+                    $ISPF_PO + 
+                    ", " + 
     $Date +  
     ", " + 
     $Condition +
@@ -562,7 +569,11 @@ $SaveSerialCSVButton.Add_Click({
     ", " + 
     $Version + 
     ", " + 
-    $Tester | Out-File -FilePath .\$SerialNumber.csv
+    $Tester 
+    
+    Write-Host $ouputString
+    
+    $outputString | Out-File -FilePath "C:\Users\tcg\Documents\spec sheet code\Computer Spec Sheet\archive\$SerialNumber.csv" -Encoding UTF8
     
 
     #Export-Csv -LiteralPath $WorkFile -NoTypeInformation -Encoding UTF8 Invoke-Item -Path $WorkFile
@@ -675,17 +686,18 @@ $objComboBoxBrand.Location = New-Object System.Drawing.Size(($columnOne + $x_off
 $objComboBoxBrand.Size = New-Object System.Drawing.Size(100,20)
 $objComboBoxBrand.Font = $TextBoxFont
 
-$objTextBoxOther = New-Object System.Windows.Forms.TextBox 
-$objTextBoxOther.Location = New-Object System.Drawing.Size(($columnOne + $x_offset + 110),($rowThree + $y_offset)) 
-$objTextBoxOther.Size = New-Object System.Drawing.Size(65,20) 
-$objTextBoxOther.Font = $TextBoxFont
-$objForm.Controls.Add($objTextBoxOther) 
-
 foreach($item in $arrBrandComboValues){
     [void] $objComboBoxBrand.Items.Add($item)
 }
 
 $objForm.Controls.Add($objComboBoxBrand) 
+
+$objTextBoxOther = New-Object System.Windows.Forms.TextBox 
+$objTextBoxOther.Location = New-Object System.Drawing.Size(($columnOne + $x_offset + 110),($rowThree + $y_offset)) 
+$objTextBoxOther.Size = New-Object System.Drawing.Size(65,20) 
+$objTextBoxOther.Font = $TextBoxFont
+$objTextBoxOther.Text = $BrandOther
+$objForm.Controls.Add($objTextBoxOther) 
 
 $objGroupBoxBrand = New-Object System.Windows.Forms.GroupBox
 $objGroupBoxBrand.Location = New-Object System.Drawing.Size($columnOne,$rowThree)
@@ -748,6 +760,7 @@ $objTextBoxCPUQty = New-Object System.Windows.Forms.TextBox
 $objTextBoxCPUQty.Location = New-Object System.Drawing.Size(($columnOne + (3 * $x_offset)),($rowFive + $y_offset)) 
 $objTextBoxCPUQty.Size = New-Object System.Drawing.Size(30,20) 
 $objTextBoxCPUQty.Font = $TextBoxFont
+$objTextBoxCPUQty.Text = $CPUQty
 $objForm.Controls.Add($objTextBoxCPUQty) 
 
 $objGroupBoxCPUQty = New-Object System.Windows.Forms.GroupBox
@@ -762,6 +775,7 @@ $objTextBoxCPUCores = New-Object System.Windows.Forms.TextBox
 $objTextBoxCPUCores.Location = New-Object System.Drawing.Size(($columnTwo + (2 * $x_offset)),($rowFive + $y_offset)) 
 $objTextBoxCPUCores.Size = New-Object System.Drawing.Size(30,20) 
 $objTextBoxCPUCores.Font = $TextBoxFont
+$objTextBoxCPUCores.Text = $CPUCores
 $objForm.Controls.Add($objTextBoxCPUCores) 
 
 # HyperThreading Check Box
@@ -942,6 +956,7 @@ $objTextBoxHDDQty = New-Object System.Windows.Forms.TextBox
 $objTextBoxHDDQty.Location = New-Object System.Drawing.Size(($columnFive + $x_offset),($rowTwo + $y_offset)) 
 $objTextBoxHDDQty.Size = New-Object System.Drawing.Size(30,20) 
 $objTextBoxHDDQty.Font = $TextBoxFont
+$objTextBoxHDDQty.Text = $HDDQty
 $objForm.Controls.Add($objTextBoxHDDQty) 
 
 $objGroupBoxHDDQty = New-Object System.Windows.Forms.GroupBox
@@ -1042,6 +1057,7 @@ $objTextBoxVideoModel = New-Object System.Windows.Forms.TextBox
 $objTextBoxVideoModel.Location = New-Object System.Drawing.Size(($columnFive + (2.5 * $x_offset)),($rowThree + $y_offset)) 
 $objTextBoxVideoModel.Size = New-Object System.Drawing.Size(125,20) 
 $objTextBoxVideoModel.Font = $TextBoxFont
+$objTextBoxVideoModel.Text = $VideoModel
 $objForm.Controls.Add($objTextBoxVideoModel) 
 
 $objGroupBoxVideoModel = New-Object System.Windows.Forms.GroupBox
@@ -1056,6 +1072,7 @@ $objTextBoxVideoRAM = New-Object System.Windows.Forms.TextBox
 $objTextBoxVideoRAM.Location = New-Object System.Drawing.Size(($columnSeven + $x_offset),($rowThree + $y_offset)) 
 $objTextBoxVideoRAM.Size = New-Object System.Drawing.Size(40,20) 
 $objTextBoxVideoRAM.Font = $TextBoxFont
+$objTextBoxVideoRAM.Text = $VideoRAM
 $objForm.Controls.Add($objTextBoxVideoRAM) 
 
 $objGroupBoxVideoRAM = New-Object System.Windows.Forms.GroupBox
@@ -1144,6 +1161,7 @@ $objTextBoxLCDSize = New-Object System.Windows.Forms.TextBox
 $objTextBoxLCDSize.Location = New-Object System.Drawing.Size(($columnSeven + (3 * $x_offset)),($rowFour + $y_offset)) 
 $objTextBoxLCDSize.Size = New-Object System.Drawing.Size(40,20) 
 $objTextBoxLCDSize.Font = $TextBoxFont
+$objTextBoxLCDSize.Text = $LCDSize
 $objForm.Controls.Add($objTextBoxLCDSize) 
 
 $objGroupBoxLCDSize = New-Object System.Windows.Forms.GroupBox
@@ -1838,7 +1856,7 @@ $PortseSATA = $objTextBoxPortseSATA.Text
 $PortsHDMI = $objTextBoxPortsHDMI.Text
 $PortsSCSI = $objTextBoxPortsSCSI.Text
 $PortsDisplayPort = $objTextBoxPortsDisplayPort.Text
-$Version = "TBD"
+#$Version = "TBD"
 $Tester = $objTextBoxTester.Text
 
 #[void] $objForm.Cursor
@@ -1993,4 +2011,67 @@ $Damage
 $PortsUSB, $PortsEthernet, $PortsModem, $PortsVGA, $PortsDVI, $PortsSVideo, $PortsPS2, $PortsAudio, $PortseSATAp,
 $PortsSerial, $PortsParallel, $PortsPCMCIA, $PortsSDCard, $PortsFirewire, $PortseSATA, $PortsHDMI, $PortsSCSI, $PortsDisplayPort
 $Version, $Tester
+#>
+
+
+<#
+Condition,Brand,Form Factor,CPU Type,RAM Type,RAM Size,RAM Rating,RAM MHz,HDD Type,HDD RPM,Optical Drive,Video,COA,Damage
+Boots to BIOS,Dell,Desktop,Pentium 3,DDR,256mb,PC-100,100MHz,IDE,Unknown,None,None,None,N/A
+Power Only,HP,SFF Desktop,Pentium 4,DDR2,512mb,PC-133,133MHz,SATA,4200,CD-ROM,Onboard,Win XP Pro,Grade A+
+For Parts,IBM,USFF Desktop,Pentium 4 HT,DDR3,768mb,PC-1600,200MHz,SCSI,5400,CD-RW,PCIe,Win Vista Business,Grade A
+Untested,Lenovo,Laptop,Pentium D,DDR4,1gb,PC-2100,266MHz,SAS,7200,DVD-ROM,AGP,Win 7 Pro,Grade B
+,Toshiba,Server,Pentium Dual Core,RAMBUS,1.5gb,PC-2700,333MHz,ZIF,10K,CD-RW/DVD,PCI,XP Home,Grade C
+,Fujitsu,Workstation,Pentium M,SDRAM,2gb,PC-3200,400MHz,FLASH,15K,DVD±RW,Mobile,XP Media,Grade D
+,Sony,Motherboard,Mobile P4,N/A,2.5gb,PC2-3200,400MHz,SSD,N/A,Blu-ray,,Vista Home Basic,Grade E
+,Apple,DVR,Celeron,,3gb,PC2-4200,533MHz,microSATA,,,,Vista Home Premium,
+,MPC,Thin Client,Celeron M,,4gb,PC2-5300,667MHz,,,,,Vista Enterprise,
+,American Dynamics,Tablet,Core Solo,,6gb,PC2-6400,800MHz,,,,,Vista Ultimate,
+,Sensormatic,All-in-One,Core Duo,,8gb,PC2-8500,1066MHz,,,,,7 Home Basic,
+,Custom,Slim Desktop,Core 2 Solo,,12gb,PC3-6400,800MHz,,,,,7 Home Premium,
+,Other:,POS,Core 2 Duo,,16gb,PC3-8500,1066MHz,,,,,7 Pro,
+,,Micro Tower,Core 2 Quad,,24gb,PC3-10600,1333MHz,,,,,7 Enterprise,
+,,Tablet Laptop,Core 2 Extreme,,32gb,PC3-12800,1600MHz,,,,,7 Ultimate,
+,,Convertible Mini Tower,Core,,48gb,PC3-14900,1867MHz,,,,,Windows 2000,
+,,Ultra Slim Desktop,Core i3,,72gb,PC3-17000,2133MHz,,,,,Windows 2000 Pro,
+,,Micro PC,Core i5,,64gb,PC3-19200,2400MHz,,,,,Windows 98,
+,,Rack Workstation,Core i7,,80gb,PC3-21300,2667MHz,,,,,Windows NT,
+,,Mini Tower,Atom,,96gb,PC3-24000,3000MHz,,,,,Server 2003,
+,,Slim Tower,Xeon,,128gb,PC4-17000,2133MHz,,,,,Server 2008,
+,,Tower Server,Opteron,,144gb,PC4-25600,3200MHz,,,,,Server 2008 R2,
+,,Server Blade,Turion,,192gb,N/A,N/A,,,,,XP Tablet PC Edition,
+,,Enclosure,Turion 64 X2,,240gb,,,,,,,Windows Embedded Standard,
+,,,Sempron,,256gb,,,,,,,Windows Server 2003 R2 Std X64,
+,,,Mobile Sempron,,288gb,,,,,,,Win Server Ent 2003 R2 x64,
+,,,Athlon 64,,None,,,,,,,Windows SBS Std 2003 R2,
+,,,Athlon 64 X2,,36gb,,,,,,,Windows 2000 Pro Embedded,
+,,,Athlon II X2,,68gb,,,,,,,XP Pro for Embedded Systems,
+,,,Athlon II X3,,,,,,,,,Windows Server 2008 R2 Std,
+,,,Phenom,,,,,,,,,,
+,,,Phenom II,,,,,,,,,,
+,,,UltraSPARC II,,,,,,,,,,
+,,,UltraSPARC III,,,,,,,,,,
+,,,UltraSPARC IV,,,,,,,,,,
+,,,UltraSPARC IIIi,,,,,,,,,,
+,,,UltraSPARC T1,,,,,,,,,,
+,,,UltraSPARC T2,,,,,,,,,,
+,,,Power6,,,,,,,,,,
+,,,TM5800,,,,,,,,,,
+,,,PowerPC G3,,,,,,,,,,
+,,,PowerPC G4,,,,,,,,,,
+,,,PowerPC G5,,,,,,,,,,
+,,,Power5,,,,,,,,,,
+,,,VIA Eden,,,,,,,,,,
+,,,VIA C7,,,,,,,,,,
+,,,VIA C7 S2,,,,,,,,,,
+,,,PA-8600,,,,,,,,,,
+,,,Pentium,,,,,,,,,,
+,,,AMD A4,,,,,,,,,,
+,,,AMD A6,,,,,,,,,,
+,,,AMD A8,,,,,,,,,,
+,,,AMD A10,,,,,,,,,,
+,,,PCX-W2,,,,,,,,,,
+,,,Itanium,,,,,,,,,,
+,,,Itanium 2,,,,,,,,,,
+,,,PowerPC,,,,,,,,,,
+
 #>
