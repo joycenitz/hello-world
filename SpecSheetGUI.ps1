@@ -68,15 +68,33 @@ $PortseSATA = ""
 $PortsHDMI = ""
 $PortsSCSI = ""
 $PortsDisplayPort = ""
-$Version = "v1.1.4"
+$Version = "v1.2.7"
 $Tester = ""
 
 
+# Combo Box Values
+# 8 item selection
 
-$arrConditionComboValues = @("Boots to BIOS", "Power Only", "For Parts", "Untested")
+$arrConditionComboValues = @("Boots to BIOS" 
+                             "Power Only" 
+                             "For Parts" 
+                             "Untested"
+)
 
-$arrBrandComboValues = @("Dell", "HP", "IBM", "Lenovo", "Other:")
-# Lenovo, Toshiba, Fujitsu, Sony, Apple, MPC, American Dynamics, Sensormatic, Custom
+$arrBrandComboValues = @("Dell" 
+                         "HP"
+                         "IBM"
+                         "Lenovo"
+                         "Toshiba"
+                         "Fujitsu"
+                         "Sony"
+                         "Apple"
+                         "MPC"
+                         "American Dynamics"
+                         "Sensormatic"
+                         "Custom"
+                         "Other:"
+)
 
 $arrFormFactorComboValues = @("Desktop"
                               "SFF Desktop"
@@ -84,43 +102,286 @@ $arrFormFactorComboValues = @("Desktop"
                               "Laptop"
                               "Server"
                               "Workstation"
+                              "Motherboard"
+                              "DVR"
+                              "Thin Client"
+                              "Tablet"
+                              "All-in-One"
+                              "Slim Desktop"
+                              "POS"
+                              "Micro Tower"
                               "Tablet Laptop"
+                              "Convertible Mini Tower"
+                              "Ultra Slim Desktop"
+                              "Micro PC"
+                              "Rack Workstation"
                               "Mini Tower"
+                              "Slim Tower"
+                              "Tower Server"
+                              "Server Blade"
+                              "Enclosure"
 )
 
-# Desktop, SFF Desktop, USFF Desktop, Laptop, Server, Workstation,
-# Motherboard, DVR, Thin Client, Tablet, All-in-One, Slim Desktop, POS, Micro Tower, Tablet Laptop, 
-# Convertable Mini Tower?, Ultra Slim Desktop, Micro PC, Rack Workstation, Mini Tower, Slim Tower
-# Tower Server, Server Blade, Enclosure
-# 8 item selection
+$arrCPUTypeComboValues = @("Pentium 3"
+                           "Pentium 4"
+                           "Pentium 4 HT"
+                           "Pentium D"
+                           "Pentium Dual Core"
+                           "Pentium M"
+                           "Mobile P4"
+                           "Celeron"
+                           "Celeron M"
+                           "Core Solo"
+                           "Core Duo"
+                           "Core 2 Solo"
+                           "Core 2 Duo"
+                           "Core 2 Quad"
+                           "Core 2 Extreme"
+                           "Core"
+                           "Core i3"
+                           "Core i5"
+                           "Core i7"
+                           "Atom"
+                           "Xeon"
+                           "Opteron"
+                           "Turion"
+                           "Turion 64 X2"
+                           "Sempron"
+                           "Mobile Sempron"
+                           "Athlon 64"
+                           "Athlon 64 X2"
+                           "Athlon II X2"
+                           "Athlon II X3"
+                           "Phenom"
+                           "Phenom II"
+                           "UltraSPARC II"
+                           "UltraSPARC III"
+                           "UltraSPARC IV"
+                           "UltraSPARC IIIi"
+                           "UltraSPARC T1"
+                           "UltraSPARC T2"
+                           "Power6"
+                           "TM5800"
+                           "PowerPC G3"
+                           "PowerPC G4"
+                           "PowerPC G5"
+                           "Power5"
+                           "VIA Eden"
+                           "VIA C7"
+                           "VIA C7 S2"
+                           "PA-8600"
+                           "Pentium"
+                           "AMD A4"
+                           "AMD A6"
+                           "AMD A8"
+                           "AMD A10"
+                           "PCX-W2"
+                           "Itanium"
+                           "Itanium 2"
+                           "PowerPC"
+)
 
-$arrCPUTypeComboValues = @("Core 2 Duo", "Core 2 Quad", "Core i3", "Core i5", "Core i7")
-$arrMemorySizeComboValues = @("1gb", 
-                              "2gb",
-                              "3gb",
-                              "4gb",
-                              "6gb",
-                              "8gb",
-                              "10gb",
-                              "12gb",
-                              "16gb",
-                              "32gb",
+$arrMemorySizeComboValues = @("256mb"
+                              "512mb"
+                              "768mb"
+                              "1gb"
+                              "1.5gb"
+                              "2gb"
+                              "2.5gb"
+                              "3gb"
+                              "4gb"
+                              "6gb"
+                              "8gb"
+                              "12gb"
+                              "16gb"
+                              "24gb"
+                              "32gb"
+                              "36gb"
+                              "48gb"
+                              "72gb"
                               "64gb"
+                              "68gb"
+                              "80gb"
+                              "96gb"
+                              "128gb"
+                              "144gb"
+                              "192gb"
+                              "240gb"
+                              "256gb"
+                              "288gb"
+                              "None"
 )
-$arrMemoryTypeComboValues = @("DDR", "DDR2", "DDR3")
-$arrMemoryRatingComboValues = @("PC2-5300", "PC2-6400","PC3-8500", "PC3-10600")
-$arrMemorySpeedComboValues = @("667MHz", "800MHz", "1066MHz", "1333MHz", "1666MHz")
-$arrHDDTypeComboValues = @("IDE", "SATA", "SCSI", "SAS", "ZIF", "FLASH", "SSD", "microSATA")
-$arrHDDRPMComboValues = @("Unknown", "4200", "5400", "7200", "10K", "15K", "N/A")
-$arrVideoComboValues = @("Mobile", "Onboard", "PCIe")
+
+$arrMemoryTypeComboValues = @("DDR" 
+                              "DDR2"
+                              "DDR3"
+                              "DDR4"
+                              "RAMBUS"
+                              "SDRAM"
+                              "N/A"
+)
+
+$arrMemoryRatingComboValues = @("PC-100"
+                                "PC-133"
+                                "PC-1600"
+                                "PC-2100"
+                                "PC-2700"
+                                "PC-3200"
+                                "PC2-3200"
+                                "PC2-4200"
+                                "PC2-5300"
+                                "PC2-6400"
+                                "PC2-8500"
+                                "PC3-6400"
+                                "PC3-8500"
+                                "PC3-10600"
+                                "PC3-12800"
+                                "PC3-14900"
+                                "PC3-17000"
+                                "PC3-19200"
+                                "PC3-21300"
+                                "PC3-24000"
+                                "PC4-17000"
+                                "PC4-25600"
+                                "N/A"
+)
+
+$arrMemorySpeedComboValues = @("100MHz"
+                               "133MHz"
+                               "200MHz"
+                               "266MHz"
+                               "333MHz"
+                               "400MHz"
+                               "400MHz"
+                               "533MHz"
+                               "667MHz"
+                               "800MHz"
+                               "1066MHz"
+                               "800MHz"
+                               "1066MHz"
+                               "1333MHz"
+                               "1600MHz"
+                               "1867MHz"
+                               "2133MHz"
+                               "2400MHz"
+                               "2667MHz"
+                               "3000MHz"
+                               "2133MHz"
+                               "3200MHz"
+                               "N/A"
+)
+
+<#
+RAM Rating	RAM MHz
+PC-100  	100MHz
+PC-133		133MHz
+PC-1600		200MHz
+PC-2100		266MHz
+PC-2700		333MHz
+PC-3200		400MHz
+
+PC2-3200	400MHz
+PC2-4200	533MHz
+PC2-5300	667MHz
+PC2-6400	800MHz
+PC2-8500	1066MHz
+
+PC3-6400	800MHz
+PC3-8500	1066MHz
+PC3-10600	1333MHz
+PC3-12800	1600MHz
+PC3-14900	1867MHz
+PC3-17000	2133MHz
+PC3-19200	2400MHz
+PC3-21300	2667MHz
+PC3-24000	3000MHz
+
+PC4-17000	2133MHz
+PC4-25600	3200MHz
+
+N/A			N/A
+#>
 
 
-$arrOpticalDriveComboValues = @("None", "CD-ROM", "CD-RW", "DVD-ROM", "CD-RW/DVD", "DVD±RW", "Blu-ray")
+$arrHDDTypeComboValues = @("IDE"
+                           "SATA"
+                           "SCSI"
+                           "SAS"
+                           "ZIF"
+                           "FLASH"
+                           "SSD"
+                           "microSATA"
+)
+
+$arrHDDRPMComboValues = @("Unknown"
+                          "4200"
+                          "5400"
+                          "7200"
+                          "10K"
+                          "15K"
+                          "N/A"
+)
+
+$arrVideoComboValues = @("None"
+                         "Onboard"
+                         "PCIe"
+                         "AGP"
+                         "PCI"
+                         "Mobile"
+)
+
+$arrOpticalDriveComboValues = @("None"
+                                "CD-ROM"
+                                "CD-RW"
+                                "DVD-ROM"
+                                "CD-RW/DVD"
+                                "DVD±RW"
+                                "Blu-ray"
+)
 
 # +/- ALT 241
 
-$arrWindowsCOAComboValues = @("None", "Win XP Pro", "Win Vista Business", "Win 7 Pro")
-$arrDamageComboValues = @("Grade A", "Grade B", "Grade C", "Grade D", "N/A")
+$arrWindowsCOAComboValues = @("None"
+                              "Win XP Pro"
+                              "Win Vista Business"
+                              "Win 7 Pro"
+                              "XP Home"
+                              "XP Media"
+                              "Vista Home Basic"
+                              "Vista Home Premium"
+                              "Vista Enterprise"
+                              "Vista Ultimate"
+                              "7 Home Basic"
+                              "7 Home Premium"
+                              "7 Pro"
+                              "7 Enterprise"
+                              "7 Ultimate"
+                              "Windows 2000"
+                              "Windows 2000 Pro"
+                              "Windows 98"
+                              "Windows NT"
+                              "Server 2003"
+                              "Server 2008"
+                              "Server 2008 R2"
+                              "XP Tablet PC Edition"
+                              "Windows Embedded Standard"
+                              "Windows Server 2003 R2 Std X64"
+                              "Win Server Ent 2003 R2 x64"
+                              "Windows SBS Std 2003 R2"
+                              "Windows 2000 Pro Embedded"
+                              "XP Pro for Embedded Systems"
+                              "Windows Server 2008 R2 Std"
+)
+
+
+$arrDamageComboValues = @("N/A"
+                          "Grade A+"
+                          "Grade A"
+                          "Grade B"
+                          "Grade C"
+                          "Grade D"
+                          "Grade E"
+)
 
 $hashOtherDrivesCheckValues = @{"None" = "$true" 
                                "FDD" = "$false" 
@@ -260,9 +521,8 @@ $CancelButton.Add_Click({
 })
 $objForm.Controls.Add($CancelButton)
 
-<#
 $PrintLabelButton = New-Object System.Windows.Forms.Button
-$PrintLabelButton.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowNine + (1 * $y_offset)))
+$PrintLabelButton.Location = New-Object System.Drawing.Size(($columnSix + $x_offset),($rowNine + (1 * $y_offset)))
 $PrintLabelButton.Size = New-Object System.Drawing.Size(75,23)
 $PrintLabelButton.Text = "Print Label"
 $PrintLabelButton.Add_Click({
@@ -270,11 +530,11 @@ $PrintLabelButton.Add_Click({
     Write-Host $printLabel
 })
 $objForm.Controls.Add($PrintLabelButton)
-#>
+
 
 $SaveSerialCSVButton = New-Object System.Windows.Forms.Button
-$SaveSerialCSVButton.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowNine + (1 * $y_offset)))
-$SaveSerialCSVButton.Size = New-Object System.Drawing.Size(75,23)
+$SaveSerialCSVButton.Location = New-Object System.Drawing.Size(($columnSeven + (3 * $x_offset)),($rowNine + (1 * $y_offset)))
+$SaveSerialCSVButton.Size = New-Object System.Drawing.Size(100,23)
 $SaveSerialCSVButton.Text = "Save Serial CSV"
 $SaveSerialCSVButton.Add_Click({
     # Capture Input from form into variables
@@ -351,6 +611,7 @@ $SaveSerialCSVButton.Add_Click({
     #$Version = "TBD"
     $Tester = $objTextBoxTester.Text
 
+<#
     # Display variables
     Write-Host $ISPF_PO
     Write-Host $Date
@@ -424,7 +685,7 @@ $SaveSerialCSVButton.Add_Click({
     Write-Host $PortsDisplayPort
     Write-Host $Version
     Write-Host $Tester
-
+#>
 
     $outputString = "" + 
                     $ISPF_PO + 
@@ -571,9 +832,9 @@ $SaveSerialCSVButton.Add_Click({
     ", " + 
     $Tester 
     
-    Write-Host $ouputString
+#    Write-Host $ouputString
     
-    $outputString | Out-File -FilePath "C:\Users\tcg\Documents\spec sheet code\Computer Spec Sheet\archive\$SerialNumber.csv" -Encoding UTF8
+    $outputString | Out-File -FilePath "C:\Users\tcg\Documents\spec sheet code\Computer Spec Sheet\archive\$SerialNumber.csv" -Encoding ASCII
     
 
     #Export-Csv -LiteralPath $WorkFile -NoTypeInformation -Encoding UTF8 Invoke-Item -Path $WorkFile
@@ -745,6 +1006,7 @@ foreach($item in $arrFormFactorComboValues){
     [void] $objComboBoxFormFactor.Items.Add($item)
 }
 
+$objComboBoxFormFactor.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxFormFactor) 
 
 $objGroupBoxFormFactor = New-Object System.Windows.Forms.GroupBox
@@ -833,6 +1095,7 @@ foreach($item in $arrCPUTypeComboValues){
     [void] $objComboBoxCPUType.Items.Add($item)
 }
 
+$objComboBoxCPUType.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxCPUType) 
 
 $objGroupBoxCPUType = New-Object System.Windows.Forms.GroupBox
@@ -882,6 +1145,7 @@ foreach($item in $arrMemorySizeComboValues){
     [void] $objComboBoxMemorySize.Items.Add($item)
 }
 
+$objComboBoxMemorySize.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxMemorySize) 
 
 $objGroupBoxMemorySize = New-Object System.Windows.Forms.GroupBox
@@ -901,6 +1165,7 @@ foreach($item in $arrMemoryTypeComboValues){
     [void] $objComboBoxMemoryType.Items.Add($item)
 }
 
+$objComboBoxMemoryType.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxMemoryType) 
 
 $objGroupBoxMemoryType = New-Object System.Windows.Forms.GroupBox
@@ -921,6 +1186,7 @@ foreach($item in $arrMemoryRatingComboValues){
     [void] $objComboBoxMemoryRating.Items.Add($item)
 }
 
+$objComboBoxMemoryRating.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxMemoryRating) 
 
 $objGroupBoxMemoryRating = New-Object System.Windows.Forms.GroupBox
@@ -941,6 +1207,7 @@ foreach($item in $arrMemorySpeedComboValues){
     [void] $objComboBoxMemorySpeed.Items.Add($item)
 }
 
+$objComboBoxMemorySpeed.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxMemorySpeed) 
 
 $objGroupBoxMemorySpeed = New-Object System.Windows.Forms.GroupBox
@@ -1265,6 +1532,7 @@ foreach($item in $arrWindowsCOAComboValues){
     [void] $objComboBoxWindowsCOA.Items.Add($item)
 }
 
+$objComboBoxWindowsCOA.DropDownHeight = 7.75 * $y_offset
 $objForm.Controls.Add($objComboBoxWindowsCOA) 
 
 $objGroupBoxWindowsCOA = New-Object System.Windows.Forms.GroupBox
@@ -1286,7 +1554,7 @@ $objRadioButtonOSInstalledNo.Text = "No"
 
 $objRadioButtonOSInstalledYes = New-Object System.Windows.Forms.RadioButton
 $objRadioButtonOSInstalledYes.Location = New-Object System.Drawing.Size(($columnSix + (4.4 * $x_offset)),($rowSix + (1.5 * $y_offset)))
-$objRadioButtonOSInstalledYes.Size = New-Object System.Drawing.Size(37,15)
+$objRadioButtonOSInstalledYes.Size = New-Object System.Drawing.Size(38,15)
 $objRadioButtonOSInstalledYes.Font = $LabelFont
 $objRadioButtonOSInstalledYes.Checked = $false 
 $objRadioButtonOSInstalledYes.Text = "Yes"
@@ -1320,7 +1588,7 @@ $objForm.Controls.Add($objGroupBoxNotes)
 
 # Damage Combo Box *************************************
 $objComboBoxDamage = New-Object System.Windows.Forms.ComboBox
-$objComboBoxDamage.Location = New-Object System.Drawing.Size(($columnSix + $x_offset),($rowNine + $y_offset))
+$objComboBoxDamage.Location = New-Object System.Drawing.Size(($columnFour + $x_offset),($rowNine + $y_offset))
 $objComboBoxDamage.Size = New-Object System.Drawing.Size(90,20)
 $objComboBoxDamage.Font = $TextBoxFont
 
@@ -1331,7 +1599,7 @@ foreach($item in $arrDamageComboValues){
 $objForm.Controls.Add($objComboBoxDamage) 
 
 $objGroupBoxDamage = New-Object System.Windows.Forms.GroupBox
-$objGroupBoxDamage.Location = New-Object System.Drawing.Size($columnSix,$rowNine)
+$objGroupBoxDamage.Location = New-Object System.Drawing.Size($columnFour,$rowNine)
 $objGroupBoxDamage.Size = New-Object System.Drawing.Size(110,45)
 $objGroupBoxDamage.Font = $GroupBoxFont
 $objGroupBoxDamage.Text = "Damage"
@@ -1474,23 +1742,6 @@ $objGroupBoxAccessories.Text = "Accessories"
 $objForm.Controls.Add($objGroupBoxAccessories)
 
 
-
-<#*******************************************************
-# Ports Check Boxes
-$objLabelHyperThreading = New-Object System.Windows.Forms.Label
-$objLabelHyperThreading.Location = New-Object System.Drawing.Size($columnTwo,$rowSix) 
-$objLabelHyperThreading.Size = New-Object System.Drawing.Size(100,15) 
-$objLabelHyperThreading.Text = "HT"
-$objLabelHyperThreading.Font = $TextBoxFont
-$objForm.Controls.Add($objLabelHyperThreading) 
-
-$objCheckBoxHyperThreading = New-Object System.Windows.Forms.CheckBox
-$objCheckBoxHyperThreading.Location = New-Object System.Drawing.Size($columnTwo,($rowSix + 15)) 
-$objForm.Controls.Add($objCheckBoxHyperThreading) 
-
-
-
-#>
 
 # Ports: USB
 $objLabelPortsUSB = New-Object System.Windows.Forms.Label
@@ -1784,6 +2035,8 @@ if ($objComboBoxBrand.Text -eq "Other:") {
 } else {
     $Brand = $objComboBoxBrand.Text
 }
+
+#[void] $objForm.Update()
 
 # Capture Input from form into variables
 $ISPF_PO = $objTextBoxISPF_PO.Text
