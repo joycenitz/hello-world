@@ -26,7 +26,7 @@ $HDDSerial = ""
 $Video = ""
 $VideoModel = "N/A"
 $VideoRAM = "N/A"
-$OpticalDrive = ""
+$OpticalDrive = "None"
 $OtherDrivesNone = ""
 $OtherDrivesFDD = ""
 $OtherDrivesTape = ""
@@ -840,6 +840,162 @@ $SaveSerialCSVButton.Add_Click({
     #Export-Csv -LiteralPath $WorkFile -NoTypeInformation -Encoding UTF8 Invoke-Item -Path $WorkFile
 })
 $objForm.Controls.Add($SaveSerialCSVButton)
+
+$Count = "1"
+
+$UpdatePreMCFCSVButton = New-Object System.Windows.Forms.Button
+$UpdatePreMCFCSVButton.Location = New-Object System.Drawing.Size(($columnEight + (3 * $x_offset)),($rowNine + (1 * $y_offset)))
+$UpdatePreMCFCSVButton.Size = New-Object System.Drawing.Size(100,23)
+$UpdatePreMCFCSVButton.Text = "Update Pre-MCF CSV"
+$UpdatePreMCFCSVButton.Add_Click({
+    # Capture Input from form into variables
+    $ISPF_PO = $objTextBoxISPF_PO.Text
+    $Date = $objLabelDate.Text
+    $Condition = $objComboBoxCondition.Text
+    $Brand = $objComboBoxBrand.Text
+    $BrandOther = $objTextBoxOther.Text
+    $SerialNumber = $objTextBoxSerialNum.Text
+    $Model = $objTextBoxModel.Text
+    $FormFactor = $objComboBoxFormFactor.Text
+    $CPUQty = $objTextBoxCPUQty.Text
+    $CPUCores = $objTextBoxCPUCores.Text
+    $HyperThreading = $objCheckBoxHyperThreading.Checked
+    $CPUSpeed = $objTextBoxCPUSpeed.Text
+    $CPUType = $objComboBoxCPUType.Text
+    $BusSpeed = $objTextBoxBusSpeed.Text
+    $CPUName = $objTextBoxCPUName.Text
+    $MemorySize = $objComboBoxMemorySize.Text
+    $MemoryRating = $objComboBoxMemoryRating.Text
+    $MemoryType = $objComboBoxMemoryType.Text
+    $MemorySpeed = $objComboBoxMemorySpeed.Text
+    $Weight = $objTextBoxWeight.Text
+    $HDDQty = $objTextBoxHDDQty.Text
+    $HDDSize = $objTextBoxHDDSize.Text
+    $HDDType = $objComboBoxHDDType.Text
+    $HDDRPM = $objComboBoxHDDRPM.Text
+    $HDDSerial = $objTextBoxHDDSerial.Text
+    $Video = $objComboBoxVideo.Text
+    $VideoModel = $objTextBoxVideoModel.Text
+    $VideoRAM = $objTextBoxVideoRAM.Text
+    $OpticalDrive = $objComboBoxOpticalDrive.Text
+    $OtherDrivesNone = $objCheckBoxOtherDrivesNone.Checked
+    $OtherDrivesFDD = $objCheckBoxOtherDrivesFDD.Checked
+    $OtherDrivesTape = $objCheckBoxOtherDrivesTape.Checked
+    $LCDSize = $objTextBoxLCDSize.Text
+    $NetworkNone = $objCheckBoxNetworkNone.Checked
+    $NetworkEthernet = $objCheckBoxNetworkEthernet.Checked
+    $NetworkModem = $objCheckBoxNetworkModem.Checked
+    $NetworkWifi = $objCheckBoxNetworkWifi.Checked
+    $NetworkBluetooth = $objCheckBoxNetworkBluetooth.Checked
+    $WindowsCOA = $objComboBoxWindowsCOA.Text
+    $OSInstallNo = $objRadioButtonOSInstalledNo.Checked
+    $OSInstallYes = $objRadioButtonOSInstalledYes.Checked
+    $Notes = $objTextBoxNotes.Text
+    $AccessoriesNone = $objCheckBoxAccessoriesNone.Checked
+    $AccessoriesACAdapter = $objCheckBoxAccessoriesACAdapter.Checked
+    $AccessoriesPowerCord = $objCheckBoxAccessoriesPowerCord.Checked
+    $AccessoriesBattery = $objCheckBoxAccessoriesBattery.Checked
+    $AccessoriesExtendedBattery = $objCheckBoxAccessoriesExtendedBattery.Checked
+    $AccessoriesFingerprintReader = $objCheckBoxAccessoriesFingerprintReader.Checked
+    $AccessoriesWebcam = $objCheckBoxAccessoriesWebcam.Checked
+    $AccessoriesKeyboard = $objCheckBoxAccessoriesKeyboard.Checked
+    $AccessoriesMouse = $objCheckBoxAccessoriesMouse.Checked
+    $Damage = $objComboBoxDamage.Text
+    $PortsUSB = $objTextBoxPortsUSB.Text
+    $PortsEthernet = $objTextBoxPortsEthernet.Text
+    $PortsModem = $objTextBoxPortsModem.Text
+    $PortsVGA = $objTextBoxPortsVGA.Text
+    $PortsDVI = $objTextBoxPortsDVI.Text
+    $PortsSVideo = $objTextBoxPortsSVideo.Text
+    $PortsPS2 = $objTextBoxPortsPS2.Text
+    $PortsAudio = $objTextBoxPortsAudio.Text
+    $PortseSATAp = $objTextBoxPortseSATAp.Text
+    $PortsSerial = $objTextBoxPortsSerial.Text
+    $PortsParallel = $objTextBoxPortsParallel.Text
+    $PortsPCMCIA = $objTextBoxPortsPCMCIA.Text
+    $PortsSDCard = $objTextBoxPortsSDCard.Text
+    $PortsFirewire = $objTextBoxPortsFirewire.Text
+    $PortseSATA = $objTextBoxPortseSATA.Text
+    $PortsHDMI = $objTextBoxPortsHDMI.Text
+    $PortsSCSI = $objTextBoxPortsSCSI.Text
+    $PortsDisplayPort = $objTextBoxPortsDisplayPort.Text
+    #$Version = "TBD"
+    $Tester = $objTextBoxTester.Text
+
+    if($HDDQty -eq "0"){
+        $HDDSection = "N/A"
+    } else {
+        $HDDSection = $HDDSize + "GB " + $HDDType
+    }
+
+    if($OpticalDrive -eq ""){
+        $OpticalDrive = "None"
+    }
+
+    if($OpticalDrive -eq "None"){
+        $OpticalSection = "N/A"
+    } else {
+        $OpticalSection = $OpticalDrive
+    }
+
+ 
+    $strPreMCFLine = $Brand + " " + $Model + " " + $FormFactor + " | " + 
+                     $CPUSpeed + "GHz " + $CPUType + " " + $CPUName + " | " +
+                     $MemorySize + " " + $MemoryRating + " | " + 
+                     $HDDSection + " | " +
+                     $OpticalSection + " | " +
+                     $Damage
+
+    Write-Host $Count + " , " + $Weight + " , " + $strPreMCFLine
+
+    $Word = New-Object -ComObject Word.Application
+    $Word.Visible = $True
+    $Document = $Word.Documents.Add()
+    $Selection = $Word.Selection
+
+    $Range = @($Selection.Paragraphs)[-1].Range
+
+    $Selection.Tables.add
+
+    $AutoFit = [Microsoft.Office.Interop.Word.WdDefaultTableBehavior].Assembly.GetTypes() | 
+    Where {$_.Name -match 'autofit'}
+    $AutoFit | Select FullName
+ 
+    $DefaultTable = [Microsoft.Office.Interop.Word.WdDefaultTableBehavior].Assembly.GetTypes() | 
+    Where {$_.Name -match 'defaulttable'}
+    $DefaultTable | Select FullName
+    
+    [Enum]::GetNames($AutoFit)
+    [Enum]::GetNames($DefaultTable)
+
+    $Table = $Selection.Tables.add(
+        $Selection.Range,2,3,
+        [Microsoft.Office.Interop.Word.WdDefaultTableBehavior]::wdWord9TableBehavior,
+        [Microsoft.Office.Interop.Word.WdAutoFitBehavior]::wdAutoFitContent
+    )
+
+    $Table.Style = "Medium Shading 1 - Accent 1"
+
+    ## Header
+    $Table.cell(1,1).range.Bold=1
+    $Table.cell(1,1).range.text = "Count"
+    $Table.cell(1,2).range.Bold=1
+    $Table.cell(1,2).range.text = "Weight"
+    $Table.cell(1,3).range.Bold=1
+    $Table.cell(1,3).range.text = "Description"
+
+    $Table.cell(2,1).range.Bold = 0
+    $Table.cell(2,1).range.text = $Count
+    $Table.cell(2,2).range.Bold = 0
+    $Table.cell(2,2).range.text = $Weight
+    $Table.cell(2,3).range.Bold = 0
+    $Table.cell(2,3).range.text = $strPreMCFLine
+
+    $Word.Selection.Start= $Document.Content.End
+    $Selection.TypeParagraph()
+
+})
+$objForm.Controls.Add($UpdatePreMCFCSVButton)
 
 
 #Title
@@ -2024,17 +2180,21 @@ $objForm.Controls.Add($objGroupBoxPorts)
 
 
 # Display Dialog Box
-$objForm.Topmost = $True
+# $objForm.Topmost = $True
 
 $objForm.Add_Shown({$objForm.Activate()})
 [void] $objForm.ShowDialog()
 
+<#
 if ($objComboBoxBrand.Text -eq "Other:") {
     $objTextBoxOther.Text = "Testing"
     $Brand = $objTextBoxOther.Text
 } else {
     $Brand = $objComboBoxBrand.Text
 }
+
+#>
+
 
 #[void] $objForm.Update()
 
